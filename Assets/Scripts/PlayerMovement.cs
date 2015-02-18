@@ -1,30 +1,38 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour 
 {
+	float xSpeed;
+	float ySpeed;
 
-	Animator animator;
-	
-	bool moving;
-	float speed;
-	
-	float speedAdjust = 4f;
-	
+	float xChange;
+	float yChange;
+
+	float xAdjust = 3f;
+	float yAdjust = 1f;
+
+	float yBoost = 2f;
+	float ySlow = 0.8f;
+
 	void Start () 
 	{
-		animator = gameObject.GetComponent<Animator>();
-	}
 	
+	}
+
 	void Update () 
 	{
-		speed = Input.GetAxis("Horizontal");
-		
-		animator.SetFloat("speed", speed);
-		
-		float change = speed * Time.deltaTime * speedAdjust;
-		
-		
-		transform.position = new Vector3(transform.position.x + change, transform.position.y, transform.position.z);
+		xSpeed = Input.GetAxis ("Horizontal");
+		ySpeed = Input.GetAxis ("Vertical");
+
+		if (ySpeed > 0)
+			ySpeed *= yBoost;
+		if (ySpeed < 0)
+			ySpeed *= ySlow;
+
+		xChange = xSpeed * Time.deltaTime * xAdjust;
+		yChange = ySpeed * Time.deltaTime * yAdjust;
+
+		transform.position = new Vector3(transform.position.x + xChange, transform.position.y + yChange, transform.position.z);
 	}
 }
