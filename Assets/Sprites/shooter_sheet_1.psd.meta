@@ -370,29 +370,49 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3
-        y: 515
-        width: 613
-        height: 102
+        y: 507
+        width: 653
+        height: 130
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: shooter_sheet_1_30
       rect:
         serializedVersion: 2
-        x: 32
+        x: 19
         y: 396
-        width: 522
-        height: 74
+        width: 612
+        height: 94
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: shooter_sheet_1_31
       rect:
         serializedVersion: 2
-        x: 60
-        y: 308
-        width: 439
-        height: 60
+        x: 23
+        y: 288
+        width: 452
+        height: 80
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_1
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 227
+        width: 208
+        height: 55
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_24
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 222
+        width: 141
+        height: 42
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
