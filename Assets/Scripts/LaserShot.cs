@@ -4,7 +4,7 @@ using System.Collections;
 public class LaserShot : MonoBehaviour 
 {
 
-	float speed = 4f;
+	public float speed = 4f;
 	float change;
 
 	void Start () 

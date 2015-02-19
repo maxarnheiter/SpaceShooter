@@ -13,7 +13,7 @@ public class PlayerShoot : MonoBehaviour {
 
 	void Update () 
 	{
-		if (Input.GetKeyDown (KeyCode.Space)) 
+		if (Input.GetKeyDown (KeyCode.Mouse0)) 
 		{
 			var newShot = GameObject.Instantiate(laserShot) as GameObject;
 

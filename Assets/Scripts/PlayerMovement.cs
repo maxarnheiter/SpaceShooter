@@ -9,11 +9,15 @@ public class PlayerMovement : MonoBehaviour
 	float xChange;
 	float yChange;
 
-	float xAdjust = 3f;
-	float yAdjust = 1f;
+	public float xAdjust;
+	public float yAdjust;
 
-	float yBoost = 2f;
-	float ySlow = 0.8f;
+	public float forwardBoost;
+	public float ySlow;
+
+	public float minimumY;
+
+	public float windResist;
 
 	void Start () 
 	{
@@ -22,17 +26,26 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update () 
 	{
+		xChange = 0;
+		yChange = 0;
+
 		xSpeed = Input.GetAxis ("Horizontal");
 		ySpeed = Input.GetAxis ("Vertical");
 
 		if (ySpeed > 0)
-			ySpeed *= yBoost;
-		if (ySpeed < 0)
-			ySpeed *= ySlow;
+			ySpeed *= forwardBoost;
 
 		xChange = xSpeed * Time.deltaTime * xAdjust;
-		yChange = ySpeed * Time.deltaTime * yAdjust;
+
+		if (ySpeed > 0)
+			yChange = (ySpeed * Time.deltaTime * yAdjust);
+		else if(transform.position.y > minimumY)
+			yChange = (ySpeed * Time.deltaTime * yAdjust) + windResist;
+
+
 
 		transform.position = new Vector3(transform.position.x + xChange, transform.position.y + yChange, transform.position.z);
+
+		
 	}
 }
