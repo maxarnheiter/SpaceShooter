@@ -17,7 +17,6 @@ public class BackgroundSlider : MonoBehaviour
 	{
 		height = gameObject.GetComponent<SpriteRenderer> ().sprite.rect.height / pixelToUnit;
 		resetY = resetPosition.y - height;
-		Debug.Log (resetY);
 	}
 
 

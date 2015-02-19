@@ -13,11 +13,6 @@ public class PlayerMovement : MonoBehaviour
 	public float yAdjust;
 
 	public float forwardBoost;
-	public float ySlow;
-
-	public float minimumY;
-
-	public float windResist;
 
 	void Start () 
 	{
@@ -37,12 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
 		xChange = xSpeed * Time.deltaTime * xAdjust;
 
-		if (ySpeed > 0)
-			yChange = (ySpeed * Time.deltaTime * yAdjust);
-		else if(transform.position.y > minimumY)
-			yChange = (ySpeed * Time.deltaTime * yAdjust) + windResist;
-
-
+		yChange = (ySpeed * Time.deltaTime * yAdjust);
 
 		transform.position = new Vector3(transform.position.x + xChange, transform.position.y + yChange, transform.position.z);
 

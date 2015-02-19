@@ -32,6 +32,9 @@ TextureImporter:
     21300054: shooter_sheet_1_27
     21300056: shooter_sheet_1_28
     21300058: shooter_sheet_1_29
+    21300064: shooter_sheet_1_29
+    21300066: shooter_sheet_1_30
+    21300068: shooter_sheet_1_31
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -80,16 +83,6 @@ TextureImporter:
         y: 713
         width: 256
         height: 272
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: shooter_sheet_1_1
-      rect:
-        serializedVersion: 2
-        x: 327
-        y: 881
-        width: 256
-        height: 104
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -372,6 +365,36 @@ TextureImporter:
         height: 17
       alignment: 2
       pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_29
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 515
+        width: 613
+        height: 102
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_30
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 396
+        width: 522
+        height: 74
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_31
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 308
+        width: 439
+        height: 60
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
