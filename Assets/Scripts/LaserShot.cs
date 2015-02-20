@@ -4,18 +4,17 @@ using System.Collections;
 public class LaserShot : MonoBehaviour 
 {
 
-	public float speed = 4f;
+	public float speed;
 
 	void Start () 
 	{
-	
+		var shotBody = gameObject.GetComponent<Rigidbody2D>();
+		shotBody.AddForce(Vector2.up * speed, ForceMode2D.Force);
 	}
 	
 
 	void Update () 
 	{
-		float change = speed * Time.deltaTime;
-
-		transform.position = new Vector3 (transform.position.x, transform.position.y + change, transform.position.z);
+	
 	}
 }

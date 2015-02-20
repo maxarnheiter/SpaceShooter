@@ -35,6 +35,13 @@ TextureImporter:
     21300064: shooter_sheet_1_29
     21300066: shooter_sheet_1_30
     21300068: shooter_sheet_1_31
+    21300070: shooter_sheet_1_34
+    21300072: shooter_sheet_1_35
+    21300074: shooter_sheet_1_36
+    21300076: shooter_sheet_1_37
+    21300078: shooter_sheet_1_38
+    21300080: shooter_sheet_1_39
+    21300082: shooter_sheet_1_40
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -415,6 +422,76 @@ TextureImporter:
         height: 42
       alignment: 6
       pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_34
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 786
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_35
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 788
+        width: 3
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_36
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 787
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_37
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 764
+        width: 7
+        height: 10
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_38
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 763
+        width: 7
+        height: 11
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_39
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 763
+        width: 5
+        height: 10
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_40
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 765
+        width: 5
+        height: 8
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
