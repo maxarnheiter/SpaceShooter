@@ -18,8 +18,21 @@ public class Health : MonoBehaviour
 	
 	}
 
-	void OnTriggerEnter2D(Collider2D collision)
-	{
-		Debug.Log (collision.gameObject);
-	}
+    public void HitByShot(Shot shot, Vector3 position)
+    {
+        currentHealth -= shot.damage;
+
+        if (currentHealth <= 0)
+            Die();
+    }
+
+    void Die()
+    {
+        var deathExplosion = gameObject.GetComponent<DeathExplosion>();
+
+        if(deathExplosion != null)
+        {
+            deathExplosion.Begin();
+        }
+    }
 }

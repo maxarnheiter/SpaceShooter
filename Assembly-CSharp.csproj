@@ -49,6 +49,8 @@
      <Compile Include="Assets\Scripts\BackgroundSlider.cs" />
      <Compile Include="Assets\Scripts\Cloud.cs" />
      <Compile Include="Assets\Scripts\CloudSpawner.cs" />
+     <Compile Include="Assets\Scripts\DeathExplosion.cs" />
+     <Compile Include="Assets\Scripts\Explosion.cs" />
      <Compile Include="Assets\Scripts\GameBounds.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
      <Compile Include="Assets\Scripts\PlayerBounds.cs" />
