@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class LaserShot : MonoBehaviour 
+public class Shot : MonoBehaviour 
 {
 
 	public float speed;
+
+	public float damage;
 
 	void Start () 
 	{

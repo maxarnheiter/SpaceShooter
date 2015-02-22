@@ -17,7 +17,6 @@ public class GameBounds : MonoBehaviour
 	
 	void OnTriggerEnter2D(Collider2D collision)
 	{
-		Debug.Log ("collision");
 		Destroy(collision.gameObject);
 	}
 }

@@ -1,18 +1,20 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LaserShot.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PowerBoost.cs">
     <Files>
-      <File FileName="Assets\Scripts\GameBounds.cs" Line="17" Column="2" />
+      <File FileName="Assets\Scripts\Health.cs" Line="23" Column="5" />
+      <File FileName="Assets\Scripts\PlayerTailAnimation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameBounds.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BackgroundSlider.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerBounds.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerWindResist.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\LaserShot.cs" Line="12" Column="25" />
-      <File FileName="Assets\Scripts\PlayerShoot.cs" Line="32" Column="56" />
+      <File FileName="Assets\Scripts\PlayerShoot.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShipAnimation.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerTailAnimation.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CloudSpawner.cs" Line="13" Column="2" />
-      <File FileName="Assets\Scripts\Cloud.cs" Line="9" Column="2" />
+      <File FileName="Assets\Scripts\CloudSpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Cloud.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Shot.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PowerBoost.cs" Line="19" Column="37" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
