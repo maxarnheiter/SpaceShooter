@@ -1,7 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Explosion.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerShoot.cs">
     <Files>
+      <File FileName="Assets\Scripts\Shot.cs" Line="15" Column="2" />
       <File FileName="Assets\Scripts\Explosion.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Health.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerTailAnimation.cs" Line="1" Column="1" />
@@ -10,12 +11,10 @@
       <File FileName="Assets\Scripts\PlayerMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerBounds.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerWindResist.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShoot.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerShoot.cs" Line="47" Column="44" />
       <File FileName="Assets\Scripts\PlayerShipAnimation.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\CloudSpawner.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Cloud.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Shot.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PowerBoost.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

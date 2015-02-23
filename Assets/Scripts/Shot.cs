@@ -1,5 +1,6 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Shot : MonoBehaviour 
 {
@@ -9,6 +10,8 @@ public class Shot : MonoBehaviour
 	public float damage;
 
     public GameObject explosion;
+
+	public List<string> targetNames;
 
 	void Start () 
 	{
@@ -24,17 +27,17 @@ public class Shot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        var targetHealth = collision.gameObject.GetComponent<Health>();
+		if (targetNames.Any (s => s == collision.gameObject.name)) 
+		{
+			var targetHealth = collision.gameObject.GetComponent<Health>();
 
-        if(targetHealth != null)
-        {
-            targetHealth.HitByShot(this, transform.position);
-        }
+			if(targetHealth != null)
+			{
+				targetHealth.HitByShot(this, transform.position);
+			}
 
-        if(collision.gameObject.name.Contains("Enemy"))
-        {
-            Explode(transform.position);
-        }
+			Explode(transform.position);
+		}
     }
 
     void Explode(Vector3 position)
