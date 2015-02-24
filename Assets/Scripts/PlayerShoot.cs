@@ -12,6 +12,12 @@ public class PlayerShoot : MonoBehaviour {
 	
 	float lastShotTime;
 
+	enum ShotType
+	{
+		Small, 
+		Large
+	}
+
 	void Start () 
 	{
 
@@ -47,11 +53,32 @@ public class PlayerShoot : MonoBehaviour {
 		lastShotTime = Time.realtimeSinceStartup;
 	}
 
+	void DoShot(ShotType shotType, Vector3 startPosition, Vector3 targetPosition, float speedBoost)
+	{
+		GameObject newShot = null;
+		Shot shot;
+
+		if (shotType == ShotType.Small) 
+			newShot = GameObject.Instantiate(smallShot, transform.position, Quaternion.identity) as GameObject;
+		
+		if (shotType == ShotType.Large)
+			newShot = GameObject.Instantiate(bigShot, transform.position, Quaternion.identity) as GameObject;
+
+		if (newShot != null) 
+		{
+			shot = newShot.GetComponent<Shot>();
+
+			if(speedBoost > 1f)
+				shot.speed *= speedBoost;
+
+			shot.Shoot(targetPosition);
+		}
+
+	}
+
 	void Level_0_Shoot()
 	{
-		var newShot = GameObject.Instantiate(smallShot) as GameObject;
-		
-		newShot.transform.position = this.transform.position;
+		DoShot (ShotType.Small, transform.position, Vector3.up, 0f);
 	}
 
 	void Level_1_Shoot()
@@ -62,11 +89,8 @@ public class PlayerShoot : MonoBehaviour {
 		var position1 = new Vector3 (transform.position.x + shot1XOffset, transform.position.y, transform.position.z);
 		var position2 = new Vector3 (transform.position.x + shot2XOffset, transform.position.y, transform.position.z);
 
-		var shot1 = GameObject.Instantiate (smallShot) as GameObject;
-		var shot2 = GameObject.Instantiate (smallShot) as GameObject;
-
-		shot1.transform.position = position1;
-		shot2.transform.position = position2;
+		DoShot (ShotType.Small, position1, Vector3.up, 1.2f);
+		DoShot (ShotType.Small, position2, Vector3.up, 1.2f);
 	}
 
 	void Level_2_Shoot()
@@ -79,13 +103,13 @@ public class PlayerShoot : MonoBehaviour {
 		var position2 = new Vector3 (transform.position.x + shot2XOffset, transform.position.y, transform.position.z);
 		var position3 = new Vector3 (transform.position.x, transform.position.y + shot3YOffset, transform.position.z);
 		
-		var shot1 = GameObject.Instantiate (smallShot) as GameObject;
-		var shot2 = GameObject.Instantiate (smallShot) as GameObject;
-		var shot3 = GameObject.Instantiate (smallShot) as GameObject;
-		
-		shot1.transform.position = position1;
-		shot2.transform.position = position2;
-		shot3.transform.position = position3;
+		DoShot (ShotType.Small, position1, Vector3.up, 1.35f);
+		DoShot (ShotType.Small, position2, Vector3.up, 1.35f);
+		DoShot (ShotType.Small, position3, Vector3.up, 1.35f);
+	}
+
+	void Level_3_Shoot()
+	{
 
 	}
 }

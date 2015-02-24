@@ -15,14 +15,19 @@ public class Shot : MonoBehaviour
 
 	void Start () 
 	{
-		var shotBody = gameObject.GetComponent<Rigidbody2D>();
-		shotBody.AddForce(Vector2.up * speed, ForceMode2D.Force);
+
 	}
 	
 
 	void Update () 
 	{
 	
+	}
+
+	public void Shoot(Vector3 targetPosition)
+	{
+		var shotBody = gameObject.GetComponent<Rigidbody2D>();
+		shotBody.AddForce(targetPosition * speed, ForceMode2D.Force);
 	}
 
     void OnTriggerEnter2D(Collider2D collision)
