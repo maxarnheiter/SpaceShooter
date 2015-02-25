@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\PlayerTailAnimation.cs" />
      <Compile Include="Assets\Scripts\PlayerWindResist.cs" />
      <Compile Include="Assets\Scripts\Rotator.cs" />
+     <Compile Include="Assets\Scripts\Shield.cs" />
      <Compile Include="Assets\Scripts\Shot.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>

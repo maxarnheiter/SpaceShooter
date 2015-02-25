@@ -32,7 +32,7 @@ public class Shot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-		if (targetNames.Any (s => s == collision.gameObject.name)) 
+		if (targetNames.Any (s => s.Contains(collision.gameObject.name))) 
 		{
 			var targetHealth = collision.gameObject.GetComponent<Health>();
 
@@ -40,6 +40,13 @@ public class Shot : MonoBehaviour
 			{
 				targetHealth.HitByShot(this, transform.position);
 			}
+
+            var targetShield = collision.gameObject.GetComponent<Shield>();
+
+            if(targetShield != null)
+            {
+                targetShield.HitByShot(this, transform.position);
+            }
 
 			Explode(transform.position);
 		}

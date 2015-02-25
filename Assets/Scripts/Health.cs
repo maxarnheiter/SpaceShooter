@@ -30,9 +30,10 @@ public class Health : MonoBehaviour
     {
         var deathExplosion = gameObject.GetComponent<DeathExplosion>();
 
-        if(deathExplosion != null)
-        {
-            deathExplosion.Begin();
-        }
+        if (deathExplosion != null) 
+		{
+			deathExplosion.Begin ();
+		} 
+
     }
 }

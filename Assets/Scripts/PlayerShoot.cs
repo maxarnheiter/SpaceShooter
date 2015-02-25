@@ -12,6 +12,8 @@ public class PlayerShoot : MonoBehaviour {
 	
 	float lastShotTime;
 
+	float upgradeIntervalBonus = -0.01f;
+
 	enum ShotType
 	{
 		Small, 
@@ -29,8 +31,10 @@ public class PlayerShoot : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Mouse0)) 
 		{
 			float timePassed = Time.realtimeSinceStartup - lastShotTime;
-			
-			if(timePassed >= shotInterval)
+
+			float adjustedShotInterval = shotInterval + (upgradeLevel * upgradeIntervalBonus);
+
+			if(timePassed >= adjustedShotInterval)
 				Shoot ();
 		}
 	}
@@ -59,10 +63,10 @@ public class PlayerShoot : MonoBehaviour {
 		Shot shot;
 
 		if (shotType == ShotType.Small) 
-			newShot = GameObject.Instantiate(smallShot, transform.position, Quaternion.identity) as GameObject;
+			newShot = GameObject.Instantiate(smallShot, startPosition, Quaternion.identity) as GameObject;
 		
 		if (shotType == ShotType.Large)
-			newShot = GameObject.Instantiate(bigShot, transform.position, Quaternion.identity) as GameObject;
+			newShot = GameObject.Instantiate(bigShot, startPosition, Quaternion.identity) as GameObject;
 
 		if (newShot != null) 
 		{
@@ -89,8 +93,8 @@ public class PlayerShoot : MonoBehaviour {
 		var position1 = new Vector3 (transform.position.x + shot1XOffset, transform.position.y, transform.position.z);
 		var position2 = new Vector3 (transform.position.x + shot2XOffset, transform.position.y, transform.position.z);
 
-		DoShot (ShotType.Small, position1, Vector3.up, 1.2f);
-		DoShot (ShotType.Small, position2, Vector3.up, 1.2f);
+		DoShot (ShotType.Small, position1, Vector3.up, 1.3f);
+		DoShot (ShotType.Small, position2, Vector3.up, 1.3f);
 	}
 
 	void Level_2_Shoot()
@@ -103,9 +107,9 @@ public class PlayerShoot : MonoBehaviour {
 		var position2 = new Vector3 (transform.position.x + shot2XOffset, transform.position.y, transform.position.z);
 		var position3 = new Vector3 (transform.position.x, transform.position.y + shot3YOffset, transform.position.z);
 		
-		DoShot (ShotType.Small, position1, Vector3.up, 1.35f);
-		DoShot (ShotType.Small, position2, Vector3.up, 1.35f);
-		DoShot (ShotType.Small, position3, Vector3.up, 1.35f);
+		DoShot (ShotType.Small, position1, Vector3.up, 1.5f);
+		DoShot (ShotType.Small, position2, Vector3.up, 1.5f);
+		DoShot (ShotType.Small, position3, Vector3.up, 1.5f);
 	}
 
 	void Level_3_Shoot()
