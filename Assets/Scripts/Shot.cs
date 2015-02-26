@@ -28,11 +28,7 @@ public class Shot : MonoBehaviour
 	{
 		var shotBody = gameObject.GetComponent<Rigidbody2D>();
 
-        Debug.Log("before" + targetPosition);
-
         Vector2 force = GetNormalizedForce(targetPosition);
-
-        Debug.Log("after" + force);
 
         shotBody.velocity = new Vector2(force.x * speed, force.y * speed);
 

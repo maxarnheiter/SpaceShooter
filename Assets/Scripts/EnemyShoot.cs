@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyShoot : MonoBehaviour 
 {
@@ -11,7 +11,14 @@ public class EnemyShoot : MonoBehaviour
     public float clusterVariation;
     public float clusterMissVariation;
     public float targetMissVariation;
-    public float waveCount;
+
+    public ShotType blindShotType;
+    public ShotType targetShotType;
+    public ShotType bombardShotType;
+    public ShotType clusterShotType;
+    public ShotType waveShotType;
+
+    public List<Vector3> wavePositions;
 
     public GameObject smallShot;
     public GameObject mediumShot;
@@ -26,11 +33,12 @@ public class EnemyShoot : MonoBehaviour
         WaveBarrage,
     }
 
-    enum ShotType
+    public enum ShotType
     {
         Small, 
         Medium, 
-        Large
+        Large, 
+        Random
     }
 
     bool isVisible;
@@ -85,6 +93,9 @@ public class EnemyShoot : MonoBehaviour
         if(shotType == ShotType.Large)
             newShot = GameObject.Instantiate(largeShot, startPosition, Quaternion.identity) as GameObject;
 
+        if(shotType == ShotType.Random)
+            newShot = GameObject.Instantiate(GetRandomShotGameObject(), startPosition, Quaternion.identity) as GameObject;
+
         if (newShot != null)
         {
             shot = newShot.GetComponent<Shot>();
@@ -125,25 +136,20 @@ public class EnemyShoot : MonoBehaviour
 
     void BlindFire()
     {
-        DoShot(ShotType.Small, transform.position, Vector3.down, 0f);
+        DoShot(blindShotType, transform.position, Vector3.down, 0f);
     }
 
     void Bombard()
     {
-        int randShot = Random.Range(0, 2);
+        
         float xChange = Random.Range((bombardXRange * -1f), bombardXRange);
         var startPos = new Vector3(transform.position.x + xChange, transform.position.y, transform.position.z);
-
-        if(randShot == 0)
-            DoShot(ShotType.Small, startPos, Vector3.down, 0f);
         
-        if(randShot == 1)
-            DoShot(ShotType.Medium, startPos, Vector3.down, 0f);
+        DoShot(bombardShotType, startPos, Vector3.down, 0f);
     }
 
     void ClusterFire()
     {
-        int randShot = Random.Range(0, 2);
 
         for(int i = 0; i <= clusterSize; i++)
         {
@@ -159,11 +165,7 @@ public class EnemyShoot : MonoBehaviour
 
             var distance = new Vector3(targetPos.x - transform.position.x, targetPos.y - transform.position.y, 0f);
 
-            if (randShot == 0)
-                DoShot(ShotType.Small, startPos, distance, 0f);
-
-            if (randShot == 1)
-                DoShot(ShotType.Medium, startPos, distance, 0f);
+            DoShot(clusterShotType, startPos, distance, 0f);
         }
 
     }
@@ -177,14 +179,17 @@ public class EnemyShoot : MonoBehaviour
 
         var distance = new Vector3(targetPos.x - transform.position.x, targetPos.y - transform.position.y, 0f);
 
-        DoShot(ShotType.Medium, transform.position, distance, 0f);
+        DoShot(targetShotType, transform.position, distance, 0f);
     }
 
     void WaveBarrage()
     {
-        for(int i = 0; i < waveCount; i++)
+        if(wavePositions.Count > 0)
         {
-
+            foreach(var position in wavePositions)
+            {
+                DoShot(waveShotType, transform.position, position, 0f);
+            }
         }
     }
 
@@ -197,5 +202,17 @@ public class EnemyShoot : MonoBehaviour
             return true;
 
         return false;
+    }
+
+    GameObject GetRandomShotGameObject()
+    {
+        int random = Random.Range(0, 3);
+
+        if (random == 1)
+            return mediumShot;
+        if (random == 2)
+            return largeShot;
+
+        return smallShot;
     }
 }
