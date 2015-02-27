@@ -19,6 +19,8 @@ public class Shield : MonoBehaviour
     float collapseStartTime;
     bool isCollapsing;
 
+    float difficulty = 1f;
+
 	void Start () 
 	{
         isCollapsing = false;
@@ -26,7 +28,28 @@ public class Shield : MonoBehaviour
         currentScale = 1f;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.color = new Color(1f, 1f, 1f, currentTransparency);
+
+        var difficultyComponent = gameObject.GetComponent<DifficultySetting>();
+
+        if (difficultyComponent != null)
+            difficulty = difficultyComponent.difficulty;
+
+        AdjustForDifficulty();
 	}
+
+    void AdjustForDifficulty()
+    {
+        if(gameObject.name.Contains("Enemy"))
+        {
+            amount *= difficulty;
+            currentAmount *= difficulty;
+        }
+        if(gameObject.name.Contains("Player"))
+        {
+            amount = amount + ((amount * difficulty) - amount);
+            currentAmount = currentAmount + ((currentAmount * difficulty) - currentAmount);
+        }
+    }
 	
 	void Update () 
 	{
