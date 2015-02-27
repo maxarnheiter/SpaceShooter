@@ -24,6 +24,8 @@ public class EnemyShoot : MonoBehaviour
     public GameObject mediumShot;
     public GameObject largeShot;
 
+    float difficulty = 1f;
+
     public enum EnemyShootBehavior
     {
         BlindFire,
@@ -48,8 +50,24 @@ public class EnemyShoot : MonoBehaviour
 
 	void Start () 
     {
-       
+        var difficultyComponent = gameObject.GetComponent<DifficultySetting>();
+
+        if (difficultyComponent != null)
+            difficulty = difficultyComponent.difficulty;
+
+        AdjustForDifficulty();
 	}
+
+    void AdjustForDifficulty()
+    {
+        attackInterval = attackInterval + ((attackInterval * difficulty) - attackInterval);
+
+        clusterSize *= Mathf.Ceil(difficulty);
+
+        clusterMissVariation = clusterMissVariation + ((clusterMissVariation * difficulty) - clusterMissVariation);
+
+        targetMissVariation = targetMissVariation + ((targetMissVariation * difficulty) - targetMissVariation);
+    }
 	
 
 	void Update () 
