@@ -98,6 +98,9 @@ TextureImporter:
     21300192: shooter_sheet_1_88
     21300194: shooter_sheet_1_89
     21300196: shooter_sheet_1_90
+    21300198: shooter_sheet_1_91
+    21300200: shooter_sheet_1_92
+    21300202: shooter_sheet_1_93
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1024,7 +1027,7 @@ TextureImporter:
         serializedVersion: 2
         x: 738
         y: 852
-        width: 128
+        width: 161
         height: 151
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -1033,39 +1036,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 753
-        y: 799
-        width: 98
+        y: 790
+        width: 130
         height: 42
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: shooter_sheet_1_71
-      rect:
-        serializedVersion: 2
-        x: 754
-        y: 774
-        width: 43
-        height: 19
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: shooter_sheet_1_83
-      rect:
-        serializedVersion: 2
-        x: 807
-        y: 774
-        width: 43
-        height: 19
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: shooter_sheet_1_84
-      rect:
-        serializedVersion: 2
-        x: 770
-        y: 725
-        width: 64
-        height: 19
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1126,6 +1099,66 @@ TextureImporter:
         y: 830
         width: 1
         height: 1
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_71
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 884
+        width: 74
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_83
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 907
+        width: 74
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_84
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 962
+        width: 47
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_91
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 943
+        width: 53
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_92
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 962
+        width: 31
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_93
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 943
+        width: 32
+        height: 8
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
