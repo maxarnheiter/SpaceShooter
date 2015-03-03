@@ -9,23 +9,43 @@ public class DifficultyButton : MonoBehaviour
 
     public GameMode setMode;
 
+    public GameObject buttonText;
+
     GameInitializer initializer;
     SpriteRenderer spriteRenderer;
+
+    SpriteRenderer buttonRenderer;
 	
 	void Start () 
     {
         initializer = GameObject.FindObjectOfType<GameInitializer>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        buttonRenderer = buttonText.GetComponent<SpriteRenderer>();
 	}
 	
 	
 	void Update () 
     {
         if (initializer.gameMode == setMode)
-            spriteRenderer.sprite = downSprite;
+            SetButton(true);
         else
-            spriteRenderer.sprite = upSprite;
+            SetButton(false);
+            
 	}
+
+    void SetButton(bool enabled)
+    {
+        if(enabled)
+        {
+            spriteRenderer.sprite = downSprite;
+            buttonRenderer.color = new Color(1f, 1f, 1f, 0.5f);
+        }
+        else
+        {
+            spriteRenderer.sprite = upSprite;
+            buttonRenderer.color = Color.white;
+        }
+    }
 
     void OnMouseDown()
     {

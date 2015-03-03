@@ -8,3 +8,10 @@ public enum GameMode
     Hard, 
     Endless
 }
+
+public enum EnemyMovmentMode
+{
+    Float, 
+    Track, 
+    Jerk
+}
