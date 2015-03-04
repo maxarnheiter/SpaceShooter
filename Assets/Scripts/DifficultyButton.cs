@@ -15,12 +15,15 @@ public class DifficultyButton : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     SpriteRenderer buttonRenderer;
+
+    AudioSource audioSource;
 	
 	void Start () 
     {
         initializer = GameObject.FindObjectOfType<GameInitializer>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         buttonRenderer = buttonText.GetComponent<SpriteRenderer>();
+        audioSource = gameObject.GetComponent<AudioSource>();
 	}
 	
 	
@@ -49,7 +52,11 @@ public class DifficultyButton : MonoBehaviour
 
     void OnMouseDown()
     {
-        initializer.gameMode = setMode;
+        if (initializer.gameMode != setMode)
+        {
+            initializer.gameMode = setMode;
+            audioSource.Play();
+        }
     }
 
     
