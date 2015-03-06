@@ -18,21 +18,25 @@ class EnemyMovement : MonoBehaviour
 
     public EnemyMovmentMode movementMode;
 
+    GameObject playerObj;
+
     Vector3 target;
     Vector3 current;
     Vector3 anchor;
+    Vector3 player;
     bool hasTarget = false;
 
     MovePhase movePhase;
 
     void Start()
     {
-
+        playerObj = GameObject.Find("Player Ship");
     }
 
     void FixedUpdate()
     {
         current = transform.position;
+        player = playerObj.transform.position;
 
         if(hasTarget)
             DoMove();
@@ -93,12 +97,35 @@ class EnemyMovement : MonoBehaviour
 
     void DoJerkBehavior()
     {
+        if (current != target)
+        {
+            transform.position = Vector3.MoveTowards(current, target, moveSpeed);
+        }
+        if (current == target)
+        {
+            int rand = Random.Range(0, 2);
 
+            float xChange = Random.Range(jerkRange * -1, jerkRange);
+            float yChange = Random.Range(jerkRange * -1, jerkRange);
+
+            var randomPosition = new Vector3(anchor.x + xChange, anchor.y + yChange, anchor.z);
+
+            float difX = randomPosition.x - current.x;
+            float difY = randomPosition.y - current.y;
+
+            if(rand == 0)
+                target = new Vector3(current.x + difX, current.y, current.z);
+            if(rand == 1)
+                target = new Vector3(current.x, current.y + difY, current.z);
+        }
     }
 
     void DoTrackBehavior()
     {
 
+            transform.position = Vector3.MoveTowards(current, target, moveSpeed);
+            target = new Vector3(player.x, current.y, current.z);
+        
     }
 
 
