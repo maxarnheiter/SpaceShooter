@@ -20,6 +20,8 @@ public class EnemyShoot : MonoBehaviour
     public ShotType clusterShotType;
     public ShotType waveShotType;
 
+    public AudioClip shotSound;
+
     public List<Vector3> wavePositions;
 
     public GameObject smallShot;
@@ -27,6 +29,8 @@ public class EnemyShoot : MonoBehaviour
     public GameObject largeShot;
 
     float difficulty = 1f;
+
+    AudioSource audioSource;
 
     public enum EnemyShootBehavior
     {
@@ -58,6 +62,9 @@ public class EnemyShoot : MonoBehaviour
             difficulty = difficultyComponent.difficulty;
 
         AdjustForDifficulty();
+
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = shotSound;
 	}
 
     void AdjustForDifficulty()
@@ -137,6 +144,8 @@ public class EnemyShoot : MonoBehaviour
 
             shot.Shoot(targetPosition);
         }
+
+        audioSource.Play();
     }
 
     void AttackPlayer()
