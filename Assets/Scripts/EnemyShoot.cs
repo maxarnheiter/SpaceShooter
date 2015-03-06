@@ -12,6 +12,8 @@ public class EnemyShoot : MonoBehaviour
     public float clusterMissVariation;
     public float targetMissVariation;
 
+    public float range;
+
     public ShotType blindShotType;
     public ShotType targetShotType;
     public ShotType bombardShotType;
@@ -72,12 +74,24 @@ public class EnemyShoot : MonoBehaviour
 
 	void Update () 
     {
-	    if(isVisible)
+	    if(isVisible && IsInRange())
         {
             FindPlayer();
             AttackPlayer();
         }
 	}
+
+    bool IsInRange()
+    {
+        FindPlayer();
+
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+
+        if (distance <= range)
+            return true;
+
+        return false;
+    }
 
     void OnBecameVisible()
     {
