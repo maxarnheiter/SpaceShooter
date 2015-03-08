@@ -21,6 +21,8 @@ public class Shield : MonoBehaviour
 
     float difficulty = 1f;
 
+    ResourceBar resBar;
+
 	void Start () 
 	{
         isCollapsing = false;
@@ -35,6 +37,8 @@ public class Shield : MonoBehaviour
             difficulty = difficultyComponent.difficulty;
 
         AdjustForDifficulty();
+
+        resBar = GameObject.Find("Player Shield Missing Bar").GetComponent<ResourceBar>();
 	}
 
     void AdjustForDifficulty()
@@ -64,6 +68,9 @@ public class Shield : MonoBehaviour
             Collapse();
             SetScale();
         }
+
+        if(gameObject.name == "Player Shield")
+            resBar.percentMissing = 100 - ((currentAmount / amount) * 100);
 	}
 
     public void HitByShot(Shot shot, Vector3 position)

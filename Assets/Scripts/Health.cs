@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
 	public float currentHealth;
 
     float difficulty = 1f;
+    ResourceBar resBar;
 
 	void Start () 
 	{
@@ -15,6 +16,8 @@ public class Health : MonoBehaviour
 
         if (difficultyComponent != null)
             difficulty = difficultyComponent.difficulty;
+
+        resBar = GameObject.Find("Player Health Missing Bar").GetComponent<ResourceBar>();
 	}
 
     void AdjustForDifficulty()
@@ -35,7 +38,10 @@ public class Health : MonoBehaviour
 
 	void Update () 
 	{
-	
+        
+        if(gameObject.name == "Player Ship")
+            resBar.percentMissing = 100 - ((currentHealth / initialHealth) * 100);   
+        
 	}
 
     public void HitByShot(Shot shot, Vector3 position)

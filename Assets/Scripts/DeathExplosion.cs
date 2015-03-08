@@ -45,7 +45,14 @@ public class DeathExplosion : MonoBehaviour
             }
 
             if (now >= endTime)
+            {
+                if(gameObject.name == "Player Ship")
+                {
+                    GameObject.FindObjectOfType<GameOver>().Begin();
+                }
                 Destroy(gameObject);
+                
+            }
 
 
         }
