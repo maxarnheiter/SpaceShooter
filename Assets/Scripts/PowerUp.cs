@@ -12,14 +12,14 @@ public class PowerUp : MonoBehaviour
 
 	void Start () 
     {
-        rigidbody2D.velocity = new Vector2(0, -1f * fallSpeed);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1f * fallSpeed);
 	}
 	
 
 	void Update () 
     {
         if(destroySelf)
-        if(!audio.isPlaying)
+        if(!GetComponent<AudioSource>().isPlaying)
             GameObject.Destroy(gameObject);
 	}
 
@@ -30,8 +30,8 @@ public class PowerUp : MonoBehaviour
             if (!playOnce)
             {
                 playOnce = true;
-                audio.Play();
-                renderer.enabled = false;
+                GetComponent<AudioSource>().Play();
+                GetComponent<Renderer>().enabled = false;
 
                 var playerShoot = collision.gameObject.GetComponent<PlayerShoot>();
 
