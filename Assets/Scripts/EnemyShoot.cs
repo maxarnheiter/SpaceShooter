@@ -142,7 +142,7 @@ public class EnemyShoot : MonoBehaviour
             if (speedBoost > 1f)
                 shot.speed *= speedBoost;
 
-            shot.Shoot(targetPosition);
+            shot.Shoot(gameObject, targetPosition);
         }
 
         audioSource.Play();

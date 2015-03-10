@@ -4,6 +4,7 @@ using System.Linq;
 
 public class Shot : MonoBehaviour 
 {
+    public event ShotCollisionEventHandler ShotCollision;
 
 	public float speed;
 
@@ -11,11 +12,13 @@ public class Shot : MonoBehaviour
 
     public GameObject explosion;
 
+    public GameObject source;
+
 	public List<string> targetNames;
 
 	void Start () 
 	{
-
+        ShotCollision += new ShotCollisionEventHandler(GLogic.OnShotCollision);
 	}
 	
 
@@ -24,8 +27,10 @@ public class Shot : MonoBehaviour
 	
 	}
 
-	public void Shoot(Vector3 targetPosition)
+	public void Shoot(GameObject Source, Vector3 targetPosition)
 	{
+        source = Source;
+
 		var shotBody = gameObject.GetComponent<Rigidbody2D>();
 
         Vector2 force = GetNormalizedForce(targetPosition);
@@ -84,24 +89,18 @@ public class Shot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+
+
+        ShotCollision(source, collision.gameObject, damage);
+
+        
 		if (targetNames.Any (s => s.Contains(collision.gameObject.name))) 
 		{
-			var targetHealth = collision.gameObject.GetComponent<Health>();
-
-			if(targetHealth != null)
-			{
-				targetHealth.HitByShot(this, transform.position);
-			}
-
-            var targetShield = collision.gameObject.GetComponent<Shield>();
-
-            if(targetShield != null)
-            {
-                targetShield.HitByShot(this, transform.position);
-            }
-
-			Explode(transform.position);
+            Explode(transform.position);
 		}
+        
+
+        
     }
 
     void Explode(Vector3 position)

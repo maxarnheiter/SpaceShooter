@@ -4,7 +4,7 @@ using System.Collections;
 public class Shield : MonoBehaviour 
 {
 
-	public float amount;
+	public float initialAmount;
     public float currentAmount;
 
     public float fadeTime;
@@ -45,12 +45,12 @@ public class Shield : MonoBehaviour
     {
         if(gameObject.name.Contains("Enemy"))
         {
-            amount *= difficulty;
+            initialAmount *= difficulty;
             currentAmount *= difficulty;
         }
         if(gameObject.name.Contains("Player"))
         {
-            amount = amount + ((amount * difficulty) - amount);
+            initialAmount = initialAmount + ((initialAmount * difficulty) - initialAmount);
             currentAmount = currentAmount + ((currentAmount * difficulty) - currentAmount);
         }
     }
@@ -70,9 +70,29 @@ public class Shield : MonoBehaviour
         }
 
         if(gameObject.name == "Player Shield")
-            resBar.percentMissing = 100 - ((currentAmount / amount) * 100);
+            resBar.percentMissing = 100 - ((currentAmount / initialAmount) * 100);
 	}
 
+    public void TakeDamage(float damage)
+    {
+        currentTransparency = 1f;
+        lastHitTime = Time.realtimeSinceStartup;
+
+        currentAmount -= damage;
+
+        if (currentAmount <= 0)
+        {
+            if (!isCollapsing)
+            {
+                isCollapsing = true;
+                SetTransparency();
+                collapseStartTime = Time.realtimeSinceStartup;
+            }
+        }
+    }
+
+
+    //soon to be deprecated
     public void HitByShot(Shot shot, Vector3 position)
     {
         currentTransparency = 1f;
@@ -115,6 +135,9 @@ public class Shield : MonoBehaviour
 
     void Collapse()
     {
+        var polyCollider = gameObject.GetComponent<PolygonCollider2D>();
+        polyCollider.enabled = false;
+
         var now = Time.realtimeSinceStartup;
         var elapsed = now - collapseStartTime;
 
