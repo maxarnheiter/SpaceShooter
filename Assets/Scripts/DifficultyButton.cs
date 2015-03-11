@@ -11,25 +11,26 @@ public class DifficultyButton : MonoBehaviour
 
     public GameObject buttonText;
 
-    GameInitializer initializer;
     SpriteRenderer spriteRenderer;
-
     SpriteRenderer buttonRenderer;
 
     AudioSource audioSource;
+
+    event DifficultyButtonClickedEventHandler DifficultyButtonClicked;
 	
 	void Start () 
     {
-        initializer = GameObject.FindObjectOfType<GameInitializer>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         buttonRenderer = buttonText.GetComponent<SpriteRenderer>();
         audioSource = gameObject.GetComponent<AudioSource>();
+
+        DifficultyButtonClicked += new DifficultyButtonClickedEventHandler(GLogic.OnDifficultyButtonClicked);
 	}
 	
 	
 	void Update () 
     {
-        if (initializer.gameMode == setMode)
+        if (GLogic.gameMode == setMode)
             SetButton(true);
         else
             SetButton(false);
@@ -52,9 +53,9 @@ public class DifficultyButton : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (initializer.gameMode != setMode)
+        if (GLogic.gameMode != setMode)
         {
-            initializer.gameMode = setMode;
+            DifficultyButtonClicked(setMode);
             audioSource.Play();
         }
     }

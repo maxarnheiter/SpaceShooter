@@ -4,49 +4,55 @@ using System.Collections;
 public class GameInitializer : MonoBehaviour 
 {
 
-    public GameMode gameMode;
+        public GameObject audioFaderObject;
+        AudioFader audioFader;
+        bool audioFaderCompleted;
 
-    AudioSource startAudio;
-    AudioSource backgroundAudio;
+        public GameObject spriteFaderObject;
+        SpriteFader spriteFader;
+        bool spriteFadeCompleted;
 
-    SpriteRenderer overlayRenderer;
+        AudioSource startAudio;
 
-    public float audioFadeOutRate;
-    public float whiteOverlayFadeInRate;
-
-    bool fade;
+        event StartButtonClickedEventHandler StartButtonClicked;
 
 	void Start () 
     {
         startAudio = gameObject.GetComponent<AudioSource>();
-	}
-	
 
-	void Update () 
-    {
-	
+        spriteFader = spriteFaderObject.GetComponent<SpriteFader>();
+        audioFader = audioFaderObject.GetComponent<AudioFader>();
+
+        StartButtonClicked += new StartButtonClickedEventHandler(GLogic.OnStartButtonClicked);
 	}
 
-    void FixedUpdate()
+
+    void OnSpriteFaderFinished()
     {
-        if (fade)
-            Fade();
+        spriteFadeCompleted = true;
+
+        if(audioFaderCompleted)
+            StartButtonClicked();
+    }
+
+    void OnAudioFaderFinished()
+    {
+        audioFaderCompleted = true;
+
+        if (spriteFadeCompleted)
+            StartButtonClicked();
     }
 
     void OnMouseDown()
     {
-        fade = true;
+        spriteFader.FaderFinished += new FaderFinishedEventHandler(OnSpriteFaderFinished);
+        spriteFader.enabled = true;
 
-        backgroundAudio = GameObject.Find("Start Menu Audio").GetComponent<AudioSource>();
-        overlayRenderer = GameObject.Find("White Fade Overlay").GetComponent<SpriteRenderer>();
+        audioFader.FaderFinished += new FaderFinishedEventHandler(OnAudioFaderFinished);
+        audioFader.enabled = true;
 
         startAudio.Play();
     }
 
-    void Fade()
-    {
-        backgroundAudio.volume -= audioFadeOutRate;
-
-        overlayRenderer.color = new Color(1f, 1f, 1f, overlayRenderer.color.a + whiteOverlayFadeInRate);
-    }
+    
 }

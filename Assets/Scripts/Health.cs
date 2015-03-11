@@ -9,8 +9,13 @@ public class Health : MonoBehaviour
 
     float difficulty = 1f;
 
+    static event DeathEventHandler Death;
+    bool doOnce;
+
 	void Start () 
 	{
+        Death += new DeathEventHandler(GLogic.OnDeath);
+
         var difficultyComponent = gameObject.GetComponent<DifficultySetting>();
 
         if (difficultyComponent != null)
@@ -31,39 +36,16 @@ public class Health : MonoBehaviour
         }
         
     }
-	
-
-	void Update () 
-	{
-        
-	}
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
 
         if (currentHealth <= 0)
-            Die();
-    }
-
-
-    //Soon to be deprecated
-    public void HitByShot(Shot shot, Vector3 position)
-    {
-        currentHealth -= shot.damage;
-
-        if (currentHealth <= 0)
-            Die();
-    }
-
-    void Die()
-    {
-        var deathExplosion = gameObject.GetComponent<DeathExplosion>();
-
-        if (deathExplosion != null) 
-		{
-			deathExplosion.Begin ();
-		} 
-
+        if (!doOnce)
+        {
+            doOnce = true;
+            Death(gameObject);
+        }
     }
 }

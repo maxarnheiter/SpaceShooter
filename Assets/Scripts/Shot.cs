@@ -89,23 +89,12 @@ public class Shot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
-
-        ShotCollision(source, collision.gameObject, damage);
-
-        
-		if (targetNames.Any (s => s.Contains(collision.gameObject.name))) 
-		{
-            Explode(transform.position);
-		}
-        
-
-        
+        ShotCollision(source, collision.gameObject, this);
     }
 
-    void Explode(Vector3 position)
+    public void Explode()
     {
-        GameObject.Instantiate(explosion, position, Quaternion.identity);
+        GameObject.Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

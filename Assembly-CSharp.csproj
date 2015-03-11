@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AudioFader.cs" />
      <Compile Include="Assets\Scripts\BackgroundSlider.cs" />
      <Compile Include="Assets\Scripts\Cloud.cs" />
      <Compile Include="Assets\Scripts\CloudSpawner.cs" />
@@ -77,6 +78,7 @@
      <Compile Include="Assets\Scripts\Rotator.cs" />
      <Compile Include="Assets\Scripts\Shield.cs" />
      <Compile Include="Assets\Scripts\Shot.cs" />
+     <Compile Include="Assets\Scripts\SpriteFader.cs" />
      <Compile Include="Assets\Scripts\Star.cs" />
      <Compile Include="Assets\Scripts\StarSpawner.cs" />
  <Reference Include="UnityEngine.UI">
