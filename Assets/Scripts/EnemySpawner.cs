@@ -5,13 +5,22 @@ using System.Linq;
 public class EnemySpawner : MonoBehaviour
 {
 
-    public bool endless;
+    public GameObject tiny;
+    public GameObject tiny_shield;
+    public GameObject small;
+    public GameObject small_shield;
+    public GameObject medium;
+    public GameObject medium_shield;
+    public GameObject large;
+    public GameObject large_shield;
+    public GameObject boss;
+    public GameObject boss_shield;
+
+    event EnemySpawnEventHandler EnemySpawn;
 
     void Start()
     {
-        var enemy = GameObject.Find("Test Enemy").GetComponent<EnemyMovement>();
-
-        enemy.SetStartPosition(new Vector3(0f, 0f, 0f));
+        EnemySpawn += new EnemySpawnEventHandler(GLogic.OnEnemySpawn);
     }
 
     void Update()

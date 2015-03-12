@@ -23,3 +23,5 @@ C:\Users\max_a\Documents\GitHub\SpaceShooter\Temp\bin\Debug\Unity.CecilTools.dll
 C:\Users\max_a\Documents\GitHub\SpaceShooter\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\max_a\Documents\GitHub\SpaceShooter\obj\Debug\Assembly-CSharp.dll
 C:\Users\max_a\Documents\GitHub\SpaceShooter\obj\Debug\Assembly-CSharp.pdb
+C:\Users\max_a\Documents\GitHub\SpaceShooter\Temp\bin\Debug\Assembly-CSharp.dll.CodeAnalysisLog.xml
+C:\Users\max_a\Documents\GitHub\SpaceShooter\Temp\bin\Debug\Assembly-CSharp.dll.lastcodeanalysissucceeded

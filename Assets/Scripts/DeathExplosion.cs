@@ -36,25 +36,14 @@ public class DeathExplosion : MonoBehaviour
     {
 	    if(isExploding)
         {
-
             var now = Time.realtimeSinceStartup;
 
             if (now >= (lastExplosionTime + explosionInterval))
-            {
                 DoExplosion();
-            }
-
+            
             if (now >= endTime)
-            {
-                if(gameObject.name == "Player Ship")
-                {
-                    GameObject.FindObjectOfType<GameOver>().Begin();
-                }
                 Destroy(gameObject);
-                
-            }
-
-
+            
         }
 	}
 

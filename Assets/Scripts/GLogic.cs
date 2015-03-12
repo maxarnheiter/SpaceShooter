@@ -35,7 +35,9 @@ public static class GLogic
     static event EnemyShieldHitEventHandler EnemyShieldHit;
     static event EnemyDeathEventHandler EnemyDeath;
 
+    //Boss
     static event BossDeathEventHandler BossDeath;
+    static event BossSpawnEventHandler BossSpawn;
 
 
     
@@ -46,6 +48,7 @@ public static class GLogic
         EnemyDeath += new EnemyDeathEventHandler(OnEnemyDeath);
 
         BossDeath += new BossDeathEventHandler(OnBossDeath);
+        BossSpawn += new BossSpawnEventHandler(OnBossSpawn);
 
         PlayerHit += new PlayerHitEventHandler(OnPlayerHit);
         PlayerShieldHit += new PlayerShieldHitEventHandler(OnPlayerShieldHit);
@@ -53,9 +56,14 @@ public static class GLogic
 
     }
 
+    public static void OnLevelLoaded()
+    {
+        playerHealth = GameObject.FindGameObjectWithTag(Conf.player_tag).GetComponent<Health>();
+        playerShield = GameObject.FindGameObjectWithTag(Conf.player_shield_tag).GetComponent<Shield>();
+    }
+
     public static void OnStartButtonClicked()
     {
-        //temp
         Application.LoadLevel("battle");
     }
 
@@ -87,9 +95,6 @@ public static class GLogic
 
     public static void OnPlayerHit(Shot shot)
     {
-        //temp
-        playerHealth = GameObject.Find("Player Ship").GetComponent<Health>();
-
         playerHealth.TakeDamage(shot.damage);
 
         shot.Explode();
@@ -99,9 +104,6 @@ public static class GLogic
 
     public static void OnPlayerShieldHit(Shot shot)
     {
-        //temp
-        playerShield = GameObject.Find("Player Shield").GetComponent<Shield>();
-
         playerShield.TakeDamage(shot.damage);
 
         shot.Explode();
@@ -109,34 +111,57 @@ public static class GLogic
         PlayerShieldChange(playerShield.initialAmount, playerShield.currentAmount);
     }
 
+    public static void OnEnemySpawn(GameObject enemy)
+    {
+        if (enemy.tag == Conf.boss_tag)
+            BossSpawn(enemy);
+    }
+
+    public static void OnBossSpawn(GameObject boss)
+    {
+
+    }
+
     public static void OnEnemyHit(GameObject enemy, Shot shot)
     {
-        Debug.Log("enemy hit");
+        var enemyHealth = enemy.GetComponent<Health>();
+
+        enemyHealth.TakeDamage(shot.damage);
+
+        shot.Explode();
     }
 
     public static void OnEnemyShieldHit(GameObject shieldObject, Shot shot)
     {
-        Debug.Log("enemy shield hit");
+        var enemyShield = shieldObject.GetComponent<Shield>();
+
+        enemyShield.TakeDamage(shot.damage);
+
+        shot.Explode();
     }
 
     public static void OnDeath(GameObject dyingObject)
     {
         if(dyingObject.tag == Conf.enemy_tag || dyingObject.tag == Conf.boss_tag)
-            PlayerDeath();
+            EnemyDeath(dyingObject);
         
         if(dyingObject.tag == Conf.player_tag)
-            EnemyDeath(dyingObject);
+            PlayerDeath();
         
     }
 
     static void OnPlayerDeath()
     {
-        //begin game over transition
+        var gameOverScript = GameObject.FindObjectOfType<GameOver>();
+
+        gameOverScript.Begin();
     }
 
     static void OnEnemyDeath(GameObject enemy)
     {
-        //do generic enemy death stuff
+        var deathExplosionComponent = enemy.GetComponent<DeathExplosion>();
+
+        deathExplosionComponent.Begin();
 
         if (enemy.tag == Conf.boss_tag)
             BossDeath(enemy);
