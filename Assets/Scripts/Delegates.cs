@@ -16,13 +16,18 @@ public delegate void PlayerHealthChangeEventHandler(float max, float current);
 public delegate void PlayerShieldChangeEventHandler(float max, float current);
 public delegate void PlayerHitEventHandler(Shot shot);
 public delegate void PlayerShieldHitEventHandler(Shot shot);
+public delegate void PlayerDeathEventHandler();
 
 public delegate void ScoreChangeEventHandler(float prevoius, float current, float change);
 public delegate void MissileCountChangeEventHandler(float previous, float current, float change);
 
 //Enemy
-public delegate void EnemyHitEventHandler(Shot shot);
-public delegate void EnemyShieldHitEventHandler(Shot shot);
+public delegate void EnemyHitEventHandler(GameObject enemyObject, Shot shot);
+public delegate void EnemyShieldHitEventHandler(GameObject enemyObject, Shot shot);
+public delegate void EnemyDeathEventHandler(GameObject enemyObject);
+
+//Boss
+public delegate void BossDeathEventHandler(GameObject bossObject);
 
 //Shot
 public delegate void ShotCollisionEventHandler(GameObject source, GameObject target, Shot shot);
@@ -32,6 +37,7 @@ public delegate void ShotCollisionEventHandler(GameObject source, GameObject tar
 //Misc
 public delegate void FaderFinishedEventHandler();
 public delegate void DeathEventHandler(GameObject dyingObject);
+
 
 
 

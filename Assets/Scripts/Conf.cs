@@ -11,5 +11,6 @@ public static class Conf
     public const string enemy_tag = "enemy";
     public const string enemy_shield_tag = "enemy shield";
     public const string shot_tag = "shot";
+    public const string boss_tag = "boss";
 }
 

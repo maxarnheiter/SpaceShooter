@@ -28,10 +28,14 @@ public static class GLogic
 
     static event PlayerHitEventHandler PlayerHit;
     static event PlayerShieldHitEventHandler PlayerShieldHit;
+    static event PlayerDeathEventHandler PlayerDeath;
 
     //Enemy
     static event EnemyHitEventHandler EnemyHit;
     static event EnemyShieldHitEventHandler EnemyShieldHit;
+    static event EnemyDeathEventHandler EnemyDeath;
+
+    static event BossDeathEventHandler BossDeath;
 
 
     
@@ -39,8 +43,14 @@ public static class GLogic
     {
         EnemyHit += new EnemyHitEventHandler(OnEnemyHit);
         EnemyShieldHit += new EnemyShieldHitEventHandler(OnEnemyShieldHit);
+        EnemyDeath += new EnemyDeathEventHandler(OnEnemyDeath);
+
+        BossDeath += new BossDeathEventHandler(OnBossDeath);
+
         PlayerHit += new PlayerHitEventHandler(OnPlayerHit);
         PlayerShieldHit += new PlayerShieldHitEventHandler(OnPlayerShieldHit);
+        PlayerDeath += new PlayerDeathEventHandler(OnPlayerDeath);
+
     }
 
     public static void OnStartButtonClicked()
@@ -59,10 +69,10 @@ public static class GLogic
         if(source.tag == Conf.player_tag)
         {
             if(target.tag == Conf.enemy_tag)
-                EnemyHit(shot);
+                EnemyHit(target, shot);
             
             if(target.tag == Conf.enemy_shield_tag)
-                EnemyShieldHit(shot);
+                EnemyShieldHit(target, shot);
         }
 
         if(source.tag == Conf.enemy_tag)
@@ -99,27 +109,42 @@ public static class GLogic
         PlayerShieldChange(playerShield.initialAmount, playerShield.currentAmount);
     }
 
-    public static void OnEnemyHit(Shot shot)
+    public static void OnEnemyHit(GameObject enemy, Shot shot)
     {
         Debug.Log("enemy hit");
     }
 
-    public static void OnEnemyShieldHit(Shot shot)
+    public static void OnEnemyShieldHit(GameObject shieldObject, Shot shot)
     {
         Debug.Log("enemy shield hit");
     }
 
     public static void OnDeath(GameObject dyingObject)
     {
-        if(dyingObject.tag == Conf.enemy_tag)
-        {
-            //do enemy death event
-        }
-
+        if(dyingObject.tag == Conf.enemy_tag || dyingObject.tag == Conf.boss_tag)
+            PlayerDeath();
+        
         if(dyingObject.tag == Conf.player_tag)
-        {
-            // do player death event
-        }
+            EnemyDeath(dyingObject);
+        
+    }
+
+    static void OnPlayerDeath()
+    {
+        //begin game over transition
+    }
+
+    static void OnEnemyDeath(GameObject enemy)
+    {
+        //do generic enemy death stuff
+
+        if (enemy.tag == Conf.boss_tag)
+            BossDeath(enemy);
+    }
+
+    static void OnBossDeath(GameObject boss)
+    {
+        //do specific boss death stuff
     }
 }
 
