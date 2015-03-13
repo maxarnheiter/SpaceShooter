@@ -74,10 +74,12 @@
      <Compile Include="Assets\Scripts\PlayerShoot.cs" />
      <Compile Include="Assets\Scripts\PlayerTailAnimation.cs" />
      <Compile Include="Assets\Scripts\PlayerWindResist.cs" />
+     <Compile Include="Assets\Scripts\Points.cs" />
      <Compile Include="Assets\Scripts\PowerUp.cs" />
      <Compile Include="Assets\Scripts\ResourceBar.cs" />
      <Compile Include="Assets\Scripts\ResourceBarAnimator.cs" />
      <Compile Include="Assets\Scripts\Rotator.cs" />
+     <Compile Include="Assets\Scripts\ScoreUpdater.cs" />
      <Compile Include="Assets\Scripts\Shield.cs" />
      <Compile Include="Assets\Scripts\Shot.cs" />
      <Compile Include="Assets\Scripts\SpriteFader.cs" />

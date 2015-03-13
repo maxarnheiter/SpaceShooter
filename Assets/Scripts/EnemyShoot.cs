@@ -120,6 +120,9 @@ public class EnemyShoot : MonoBehaviour
 
     void DoShot(ShotType shotType, Vector3 startPosition, Vector3 targetPosition, float speedBoost)
     {
+        if (GLogic.playerDead)
+            return;
+
         GameObject newShot = null;
         Shot shot;
 
@@ -145,7 +148,7 @@ public class EnemyShoot : MonoBehaviour
             shot.Shoot(gameObject, targetPosition);
         }
 
-        audioSource.Play();
+            audioSource.Play();
     }
 
     void AttackPlayer()

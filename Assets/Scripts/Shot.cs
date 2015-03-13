@@ -14,8 +14,6 @@ public class Shot : MonoBehaviour
 
     public GameObject source;
 
-	public List<string> targetNames;
-
 	void Start () 
 	{
         ShotCollision += new ShotCollisionEventHandler(GLogic.OnShotCollision);

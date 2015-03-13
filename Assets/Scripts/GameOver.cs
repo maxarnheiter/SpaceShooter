@@ -4,26 +4,36 @@ using System.Collections;
 public class GameOver : MonoBehaviour 
 {
 
-    public float fadeRate;
+    public GameObject primaryAudioObject;
+    public GameObject secondaryAudioObject;
 
-    SpriteRenderer spriteRenderer;
+    SpriteFader spriteFader;
+    AudioFader primaryAudioFader;
+    AudioFader secondaryAudioFader;
 
-    bool start;
+    AudioSource audioSource;
 
 	void Start () 
     {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteFader = gameObject.GetComponent<SpriteFader>();
+        primaryAudioFader = primaryAudioObject.GetComponent<AudioFader>();
+        secondaryAudioFader = secondaryAudioObject.GetComponent<AudioFader>();
+
+        audioSource = gameObject.GetComponent<AudioSource>();
 	}
 	
 
 	void FixedUpdate () 
     {
-        if(start)
-           spriteRenderer.color = new Color(1f, 1f, 1f, spriteRenderer.color.a + fadeRate);
+       
 	}
 
     public void Begin()
     {
-        start = true;
+        spriteFader.enabled = true;
+        primaryAudioFader.enabled = true;
+        secondaryAudioFader.enabled = true;
+
+        audioSource.Play();
     }
 }

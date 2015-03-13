@@ -17,8 +17,10 @@ public static class GLogic
     static Health playerHealth;
     static Shield playerShield;
 
-    static float score;
-    static float missileCount;
+    public static bool playerDead;
+
+    public static float score;
+    public static float missileCount;
 
     public static event ScoreChangeEventHandler ScoreChange;
     public static event MissileCountChangeEventHandler MissileCountChange;
@@ -74,6 +76,9 @@ public static class GLogic
 
     public static void OnShotCollision(GameObject source, GameObject target, Shot shot)
     {
+        if (source == null || target == null)
+            return;
+
         if(source.tag == Conf.player_tag)
         {
             if(target.tag == Conf.enemy_tag)
@@ -95,20 +100,26 @@ public static class GLogic
 
     public static void OnPlayerHit(Shot shot)
     {
-        playerHealth.TakeDamage(shot.damage);
+        if (!playerDead)
+        {
+            playerHealth.TakeDamage(shot.damage);
 
-        shot.Explode();
+            shot.Explode();
 
-        PlayerHealthChange(playerHealth.initialHealth, playerHealth.currentHealth);
+            PlayerHealthChange(playerHealth.initialHealth, playerHealth.currentHealth);
+        }
     }
 
     public static void OnPlayerShieldHit(Shot shot)
     {
-        playerShield.TakeDamage(shot.damage);
+        if (!playerDead)
+        {
+            playerShield.TakeDamage(shot.damage);
 
-        shot.Explode();
+            shot.Explode();
 
-        PlayerShieldChange(playerShield.initialAmount, playerShield.currentAmount);
+            PlayerShieldChange(playerShield.initialAmount, playerShield.currentAmount);
+        }
     }
 
     public static void OnEnemySpawn(GameObject enemy)
@@ -127,6 +138,8 @@ public static class GLogic
         var enemyHealth = enemy.GetComponent<Health>();
 
         enemyHealth.TakeDamage(shot.damage);
+
+        score += enemy.GetComponent<Points>().hitValue;
 
         shot.Explode();
     }
@@ -166,6 +179,8 @@ public static class GLogic
 
     static void OnPlayerDeath()
     {
+        playerDead = true;
+
         var gameOverScript = GameObject.FindObjectOfType<GameOver>();
 
         gameOverScript.Begin();
@@ -173,6 +188,8 @@ public static class GLogic
 
     static void OnEnemyDeath(GameObject enemy)
     {
+        score += enemy.GetComponent<Points>().deathValue;
+
         if (enemy.tag == Conf.boss_tag)
             BossDeath(enemy);
     }

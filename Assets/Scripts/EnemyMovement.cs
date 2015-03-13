@@ -24,7 +24,7 @@ class EnemyMovement : MonoBehaviour
     Vector3 current;
     Vector3 anchor;
     Vector3 player;
-    bool hasTarget = false;
+    bool hasTarget;
 
     MovePhase movePhase;
 
@@ -35,6 +35,9 @@ class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (movePhase == MovePhase.MoveToStart)
+            hasTarget = true;
+
         current = transform.position;
         player = playerObj.transform.position;
 
@@ -45,6 +48,7 @@ class EnemyMovement : MonoBehaviour
     public void SetStartPosition(Vector3 startPosition)
     {
         anchor = startPosition;
+        target = anchor;
         hasTarget = true;
         movePhase = MovePhase.MoveToStart;
     }
@@ -70,6 +74,7 @@ class EnemyMovement : MonoBehaviour
 
     void DoStartBehavior()
     {
+
         if(current != target)
         {
             transform.position = Vector3.MoveTowards(current, anchor, moveSpeed);

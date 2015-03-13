@@ -34,7 +34,8 @@ public class SpriteFader : MonoBehaviour
         if (!doOnce)
         {
             doOnce = true;
-            FaderFinished();
+            if(FaderFinished != null)
+                FaderFinished();
         }
 	}
 
