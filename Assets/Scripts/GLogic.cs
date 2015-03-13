@@ -64,7 +64,7 @@ public static class GLogic
 
     public static void OnStartButtonClicked()
     {
-        Application.LoadLevel("battle");
+        Application.LoadLevel("battle_backup");
     }
 
     public static void OnDifficultyButtonClicked(GameMode newGameMode)
@@ -131,6 +131,17 @@ public static class GLogic
         shot.Explode();
     }
 
+    public static void OnDeathExplosionEnd(GameObject explodingObject)
+    {
+        if (explodingObject.tag == Conf.enemy_tag || explodingObject.tag == Conf.boss_tag)
+            GameObject.Destroy(explodingObject);
+
+        if (explodingObject.tag == Conf.player_tag)
+        {
+            explodingObject.GetComponent<DeathExplosion>().enabled = false;
+        }
+    }
+
     public static void OnEnemyShieldHit(GameObject shieldObject, Shot shot)
     {
         var enemyShield = shieldObject.GetComponent<Shield>();
@@ -147,6 +158,9 @@ public static class GLogic
         
         if(dyingObject.tag == Conf.player_tag)
             PlayerDeath();
+
+        var deathExplosionComponent = dyingObject.GetComponent<DeathExplosion>();
+        deathExplosionComponent.Begin();
         
     }
 
@@ -159,10 +173,6 @@ public static class GLogic
 
     static void OnEnemyDeath(GameObject enemy)
     {
-        var deathExplosionComponent = enemy.GetComponent<DeathExplosion>();
-
-        deathExplosionComponent.Begin();
-
         if (enemy.tag == Conf.boss_tag)
             BossDeath(enemy);
     }
@@ -171,6 +181,8 @@ public static class GLogic
     {
         //do specific boss death stuff
     }
+
+
 }
 
 

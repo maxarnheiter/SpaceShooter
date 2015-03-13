@@ -29,7 +29,7 @@ public class ResourceBarAnimator : MonoBehaviour
 	}
 	
 	
-	void Update () 
+	void FixedUpdate () 
     {
         var now = Time.realtimeSinceStartup;
         var elapsed = now - lastFadeTime;

@@ -39,8 +39,10 @@ public delegate void ShotCollisionEventHandler(GameObject source, GameObject tar
 //Misc
 public delegate void FaderFinishedEventHandler();
 public delegate void DeathEventHandler(GameObject dyingObject);
-
+public delegate void DeathExplosionEndEventHandler(GameObject explodingObject);
 public delegate void LevelLoadedEventHandler();
+
+
 
 
 

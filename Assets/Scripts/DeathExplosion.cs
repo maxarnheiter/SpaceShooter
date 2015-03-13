@@ -20,6 +20,7 @@ public class DeathExplosion : MonoBehaviour
     float explosionInterval;
     float lastExplosionTime;
 
+    event DeathExplosionEndEventHandler DeathExplosionEnd;
 
 	void Start () 
     {
@@ -30,6 +31,8 @@ public class DeathExplosion : MonoBehaviour
             xRange = poly.bounds.extents.x;
             yRange = poly.bounds.extents.y;
         }
+
+        DeathExplosionEnd += new DeathExplosionEndEventHandler(GLogic.OnDeathExplosionEnd);
 	}
 	
 	void Update () 
@@ -40,9 +43,9 @@ public class DeathExplosion : MonoBehaviour
 
             if (now >= (lastExplosionTime + explosionInterval))
                 DoExplosion();
-            
+
             if (now >= endTime)
-                Destroy(gameObject);
+                DeathExplosionEnd(gameObject);
             
         }
 	}
