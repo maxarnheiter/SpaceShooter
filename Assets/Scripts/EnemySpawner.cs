@@ -78,6 +78,8 @@ public class EnemySpawner : MonoBehaviour
     void DoEasy()
     {
         SpawnGroup(tiny, GroupType.DoubleHorizontal, 10f);
+
+        SpawnGroup(small, GroupType.TripleTriangle, 15f);
     }
 
     void DoNormal()
@@ -119,7 +121,9 @@ public class EnemySpawner : MonoBehaviour
                 break;
                 case GroupType.TripleTriangle:
                 {
-
+                    Spawn(enemy, new Vector3(Bx, Dy, 0f));
+                    Spawn(enemy, new Vector3(Dx, Dy, 0f));
+                    Spawn(enemy, new Vector3(Cx, Cy, 0f));
                 }
                 break;
                 case GroupType.TripleDiagonal:
@@ -151,8 +155,7 @@ public class EnemySpawner : MonoBehaviour
     void Spawn(GameObject enemy, Vector3 startPosition)
     {
         GameObject.Instantiate(enemy, transform.position, Quaternion.identity);
-        enemy.GetComponent<EnemyMovement>().SetStartPosition(startPosition);
-        EnemySpawn(enemy);
+        EnemySpawn(enemy, startPosition);
     }
 }
 

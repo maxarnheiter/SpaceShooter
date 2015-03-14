@@ -122,10 +122,12 @@ public static class GLogic
         }
     }
 
-    public static void OnEnemySpawn(GameObject enemy)
+    public static void OnEnemySpawn(GameObject enemy, Vector3 startPosition)
     {
         if (enemy.tag == Conf.boss_tag)
             BossSpawn(enemy);
+
+        enemy.GetComponent<EnemyMovement>().SetStartPosition(startPosition);
     }
 
     public static void OnBossSpawn(GameObject boss)

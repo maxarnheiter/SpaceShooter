@@ -25,7 +25,7 @@ public delegate void MissileCountChangeEventHandler(float previous, float curren
 public delegate void EnemyHitEventHandler(GameObject enemyObject, Shot shot);
 public delegate void EnemyShieldHitEventHandler(GameObject enemyObject, Shot shot);
 public delegate void EnemyDeathEventHandler(GameObject enemyObject);
-public delegate void EnemySpawnEventHandler(GameObject enemyObject);
+public delegate void EnemySpawnEventHandler(GameObject enemyObject, Vector3 startPosition);
 
 //Boss
 public delegate void BossDeathEventHandler(GameObject bossObject);
