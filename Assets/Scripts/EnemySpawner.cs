@@ -31,6 +31,8 @@ public class EnemySpawner : MonoBehaviour
     float minimumSpawnGap = 1f;
     float lastSpawnTime;
 
+    float startTime;
+
     enum GroupType
     {
         DoubleHorizontal,
@@ -48,6 +50,8 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         EnemySpawn += new EnemySpawnEventHandler(GLogic.OnEnemySpawn);
+
+        startTime = Time.realtimeSinceStartup;
     }
 
     void FixedUpdate()
@@ -77,9 +81,17 @@ public class EnemySpawner : MonoBehaviour
 
     void DoEasy()
     {
-        SpawnGroup(tiny, GroupType.DoubleHorizontal, 10f);
+        SpawnGroup(tiny, GroupType.DoubleHorizontal, 5f);
 
-        SpawnGroup(small, GroupType.TripleTriangle, 15f);
+        SpawnGroup(small, GroupType.TripleTriangle, 10f);
+
+        SpawnGroup(medium, GroupType.Square, 17f);
+
+        SpawnGroup(large, GroupType.TripleDiagonal, 35f);
+
+        SpawnGroup(medium, GroupType.TripleWall, 50f);
+
+        SpawnGroup(small, GroupType.SquareWide, 60f);
     }
 
     void DoNormal()
@@ -101,9 +113,9 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnGroup(GameObject enemy, GroupType groupType, float spawnTime)
     {
-        var now = Time.realtimeSinceStartup;
+        var elapsed = Time.realtimeSinceStartup - startTime;
 
-        if (now >= spawnTime && now <= (spawnTime + minimumSpawnGap))
+        if (elapsed >= spawnTime && elapsed <= (spawnTime + minimumSpawnGap))
         {
 
             switch(groupType)
@@ -116,7 +128,8 @@ public class EnemySpawner : MonoBehaviour
                 break;
                 case GroupType.DoubleVertical:
                 {
-
+                    Spawn(enemy, new Vector3(Cx, By, 0f));
+                    Spawn(enemy, new Vector3(Bx, Dy, 0f));
                 }
                 break;
                 case GroupType.TripleTriangle:
@@ -128,34 +141,44 @@ public class EnemySpawner : MonoBehaviour
                 break;
                 case GroupType.TripleDiagonal:
                 {
-
+                    Spawn(enemy, new Vector3(Bx, Ey, 0f));
+                    Spawn(enemy, new Vector3(Cx, Dy, 0f));
+                    Spawn(enemy, new Vector3(Dx, Cy, 0f));
                 }
                 break;
                 case GroupType.TripleWall:
                 {
-
+                    Spawn(enemy, new Vector3(Bx, Ey, 0f));
+                    Spawn(enemy, new Vector3(Cx, Ey, 0f));
+                    Spawn(enemy, new Vector3(Dx, Ey, 0f));
                 }
                 break;
                 case GroupType.Square:
                 {
-
+                    Spawn(enemy, new Vector3(Bx, By, 0f));
+                    Spawn(enemy, new Vector3(Dx, By, 0f));
+                    Spawn(enemy, new Vector3(Bx, Dy, 0f));
+                    Spawn(enemy, new Vector3(Dx, Dy, 0f));
                 }
                 break;
                 case GroupType.SquareWide:
                 {
-
+                    Spawn(enemy, new Vector3(Ax, Ay, 0f));
+                    Spawn(enemy, new Vector3(Ex, Ay, 0f));
+                    Spawn(enemy, new Vector3(Ax, Ey, 0f));
+                    Spawn(enemy, new Vector3(Ex, Ey, 0f));
                 }
                 break;
             }
 
-            lastSpawnTime = now;
+            lastSpawnTime = Time.realtimeSinceStartup;
         }
     }
 
-    void Spawn(GameObject enemy, Vector3 startPosition)
+    void Spawn(GameObject enemyPrefab, Vector3 startPosition)
     {
-        GameObject.Instantiate(enemy, transform.position, Quaternion.identity);
-        EnemySpawn(enemy, startPosition);
+        var newEnemyObject = GameObject.Instantiate(enemyPrefab, transform.position, Quaternion.identity) as GameObject;
+        EnemySpawn(newEnemyObject, startPosition);
     }
 }
 

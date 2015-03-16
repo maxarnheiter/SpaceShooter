@@ -78,7 +78,7 @@ class EnemyMovement : MonoBehaviour
         if(current != target)
         {
             transform.position = Vector3.MoveTowards(current, anchor, moveSpeed);
-            Debug.Log(anchor);
+            
         }
         if(current == target)
         {

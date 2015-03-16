@@ -10,8 +10,6 @@ public static class GLogic
     public static GameState gameState;
     public static GameMode gameMode;
 
-    
-
 
     //Player
     static Health playerHealth;
