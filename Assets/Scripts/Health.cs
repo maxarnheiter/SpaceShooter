@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Health : MonoBehaviour 
+public class Health : MonoBehaviour, IAdjustedDifficulty
 {
 
 	public float initialHealth;
@@ -16,24 +16,36 @@ public class Health : MonoBehaviour
 	{
         Death += new DeathEventHandler(GLogic.OnDeath);
 
-        var difficultyComponent = gameObject.GetComponent<DifficultySetting>();
+        AdjustForDifficulty();
 
-        if (difficultyComponent != null)
-            difficulty = difficultyComponent.difficulty;
+        currentHealth = initialHealth;
 	}
 
-    void AdjustForDifficulty()
+    public void AdjustForDifficulty()
     {
-        if(gameObject.name.Contains("Player"))
-        {
-            initialHealth = initialHealth + ((initialHealth * difficulty) - initialHealth);
-            currentHealth = currentHealth + ((currentHealth * difficulty) - currentHealth);
-        }
-        if(gameObject.name.Contains("Enemy"))
-        {
-            initialHealth *= difficulty;
-            currentHealth *= difficulty;
-        }
+        if (GLogic.difficultyMode == DifficultyMode.Easy)
+            Easy();
+        if (GLogic.difficultyMode == DifficultyMode.Hard)
+            Hard();
+    }
+
+    public void Easy()
+    {
+        if(gameObject.tag == Conf.player_tag)
+            currentHealth = currentHealth * 1.5f;
+        
+        if(gameObject.tag == Conf.enemy_tag || gameObject.tag == Conf.boss_tag)
+            currentHealth = currentHealth / 1.5f;
+        
+    }
+
+    public void Hard()
+    {
+        if (gameObject.tag == Conf.player_tag)
+            currentHealth = currentHealth / 1.5f;
+        
+        if (gameObject.tag == Conf.enemy_tag || gameObject.tag == Conf.boss_tag)
+            currentHealth = currentHealth * 1.5f;
         
     }
 

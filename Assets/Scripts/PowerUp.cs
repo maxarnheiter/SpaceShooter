@@ -25,7 +25,7 @@ public class PowerUp : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "Player Ship")
+        if(collision.gameObject.tag == Conf.player_tag)
         {
             if (!playOnce)
             {
@@ -33,9 +33,17 @@ public class PowerUp : MonoBehaviour
                 GetComponent<AudioSource>().Play();
                 GetComponent<Renderer>().enabled = false;
 
+                //Adjust player shooting behavior
                 var playerShoot = collision.gameObject.GetComponent<PlayerShoot>();
-
                 playerShoot.upgradeLevel++;
+
+                //Adjust player movement behavior
+                var playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
+                playerMovement.xAdjust *= 1.1f;
+                playerMovement.yAdjust *= 1.1f;
+                playerMovement.forwardBoost *= 1.1f;
+
+                
             }
 
             destroySelf = true;

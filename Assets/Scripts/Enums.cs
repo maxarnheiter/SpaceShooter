@@ -9,7 +9,7 @@ public enum GameState
     GameOver
 }
 
-public enum GameMode
+public enum DifficultyMode
 {
     Easy, 
     Normal, 

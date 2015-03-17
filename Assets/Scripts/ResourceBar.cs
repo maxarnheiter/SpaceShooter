@@ -21,7 +21,7 @@ public class ResourceBar : MonoBehaviour
                 GLogic.PlayerShieldChange += new PlayerShieldChangeEventHandler(OnResourceChange);
             break;
             case ResourceBarType.BossHealth:
-                
+                GLogic.BossHealthChange += new BossHealthChangeEventHandler(OnResourceChange);
             break;
         }
 	}

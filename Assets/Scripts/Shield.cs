@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Shield : MonoBehaviour 
+public class Shield : MonoBehaviour, IAdjustedDifficulty
 {
 
 	public float initialAmount;
@@ -17,113 +17,58 @@ public class Shield : MonoBehaviour
 
     float lastHitTime;
     float collapseStartTime;
-    bool isCollapsing;
 
     float difficulty = 1f;
 
-    ResourceBar resBar;
-
 	void Start () 
 	{
-        isCollapsing = false;
         currentTransparency = 0f;
         currentScale = 1f;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.color = new Color(1f, 1f, 1f, currentTransparency);
 
-        var difficultyComponent = gameObject.GetComponent<DifficultySetting>();
-
-        if (difficultyComponent != null)
-            difficulty = difficultyComponent.difficulty;
-
         AdjustForDifficulty();
 
-        resBar = GameObject.Find("Player Shield Missing Bar").GetComponent<ResourceBar>();
+        currentAmount = initialAmount;
 	}
 
-    void AdjustForDifficulty()
+    public void AdjustForDifficulty()
     {
-        if(gameObject.name.Contains("Enemy"))
-        {
-            initialAmount *= difficulty;
-            currentAmount *= difficulty;
-        }
-        if(gameObject.name.Contains("Player"))
-        {
-            initialAmount = initialAmount + ((initialAmount * difficulty) - initialAmount);
-            currentAmount = currentAmount + ((currentAmount * difficulty) - currentAmount);
-        }
+        if (GLogic.difficultyMode == DifficultyMode.Easy)
+            Easy();
+        if (GLogic.difficultyMode == DifficultyMode.Hard)
+            Hard();
+    }
+
+    public void Easy()
+    {
+        if (gameObject.tag == Conf.player_tag)
+            currentAmount = currentAmount * 1.5f;
+
+        if (gameObject.tag == Conf.enemy_tag || gameObject.tag == Conf.boss_tag)
+            currentAmount = currentAmount / 1.5f;
+
+    }
+
+    public void Hard()
+    {
+        if (gameObject.tag == Conf.player_tag)
+            currentAmount = currentAmount / 1.5f;
+
+        if (gameObject.tag == Conf.enemy_tag || gameObject.tag == Conf.boss_tag)
+            currentAmount = currentAmount * 1.5f;
+
     }
 	
 	void Update () 
 	{
-        if (!isCollapsing)
-        {
-            Fade();
-            SetTransparency();
-        }
-
-        if(isCollapsing)
-        {
-            Collapse();
-            SetScale();
-        }
-
-        if(gameObject.name == "Player Shield")
-            resBar.percentMissing = 100 - ((currentAmount / initialAmount) * 100);
+        Fade();
+        SetTransparency();
+        
 	}
-
-    public void TakeDamage(float damage)
-    {
-        currentTransparency = 1f;
-        lastHitTime = Time.realtimeSinceStartup;
-
-        currentAmount -= damage;
-
-        if (currentAmount <= 0)
-        {
-            if (!isCollapsing)
-            {
-                isCollapsing = true;
-                SetTransparency();
-                collapseStartTime = Time.realtimeSinceStartup;
-            }
-        }
-    }
-
-
-    //soon to be deprecated
-    public void HitByShot(Shot shot, Vector3 position)
-    {
-        currentTransparency = 1f;
-        lastHitTime = Time.realtimeSinceStartup;
-
-        currentAmount -= shot.damage;
-
-        if (currentAmount <= 0)
-        {
-            if (!isCollapsing)
-            {
-                isCollapsing = true;
-                SetTransparency();
-                collapseStartTime = Time.realtimeSinceStartup;
-            }
-        }
-    }
-
-    void SetTransparency()
-    {
-        spriteRenderer.color = new Color(1f, 1f, 1f, currentTransparency);
-    }
-
-    void SetScale()
-    {
-        transform.localScale = new Vector3(currentScale, currentScale, 1f);
-    }
 
     void Fade()
     {
-
         if (lastHitTime != 0)
         {
             var now = Time.realtimeSinceStartup;
@@ -133,17 +78,16 @@ public class Shield : MonoBehaviour
         }
     }
 
-    void Collapse()
+    void SetTransparency()
     {
-        var polyCollider = gameObject.GetComponent<PolygonCollider2D>();
-        polyCollider.enabled = false;
+        spriteRenderer.color = new Color(1f, 1f, 1f, currentTransparency);
+    }
 
-        var now = Time.realtimeSinceStartup;
-        var elapsed = now - collapseStartTime;
+    public void TakeDamage(float damage)
+    {
+        currentTransparency = 1f;
+        lastHitTime = Time.realtimeSinceStartup;
 
-        if (elapsed >= collapseTime)
-            Destroy(gameObject);
-
-        currentScale = 1f - (elapsed / collapseTime);
+        currentAmount -= damage;
     }
 }

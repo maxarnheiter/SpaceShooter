@@ -7,7 +7,7 @@ using UnityEngine;
 
 //Game State and Mode
 public delegate void StartButtonClickedEventHandler();
-public delegate void DifficultyButtonClickedEventHandler(GameMode newGameMode);
+public delegate void DifficultyButtonClickedEventHandler(DifficultyMode newGameMode);
 
 
 
@@ -30,6 +30,7 @@ public delegate void EnemySpawnEventHandler(GameObject enemyObject, Vector3 star
 //Boss
 public delegate void BossDeathEventHandler(GameObject bossObject);
 public delegate void BossSpawnEventHandler(GameObject bossObject);
+public delegate void BossHealthChangeEventHandler(float max, float current);
 
 //Shot
 public delegate void ShotCollisionEventHandler(GameObject source, GameObject target, Shot shot);
@@ -42,6 +43,8 @@ public delegate void DeathEventHandler(GameObject dyingObject);
 public delegate void DeathExplosionEndEventHandler(GameObject explodingObject);
 public delegate void LevelLoadedEventHandler();
 
+public delegate void VictoryEventHandler();
+public delegate void DefeatEventHandler();
 
 
 

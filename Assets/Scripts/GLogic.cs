@@ -8,7 +8,10 @@ public static class GLogic
 
     //Game State and Mode
     public static GameState gameState;
-    public static GameMode gameMode;
+    public static DifficultyMode difficultyMode = DifficultyMode.Normal;
+
+    static event VictoryEventHandler Victory;
+    static event DefeatEventHandler Defeat;
 
 
     //Player
@@ -18,7 +21,6 @@ public static class GLogic
     public static bool playerDead;
 
     public static float score;
-    public static float missileCount;
 
     public static event ScoreChangeEventHandler ScoreChange;
     public static event MissileCountChangeEventHandler MissileCountChange;
@@ -38,6 +40,12 @@ public static class GLogic
     //Boss
     static event BossDeathEventHandler BossDeath;
     static event BossSpawnEventHandler BossSpawn;
+    public static event BossHealthChangeEventHandler BossHealthChange;
+
+    static GameObject bossHealthBar;
+
+    //Music
+    static MusicPlayer musicPlayer;
 
 
     
@@ -54,12 +62,19 @@ public static class GLogic
         PlayerShieldHit += new PlayerShieldHitEventHandler(OnPlayerShieldHit);
         PlayerDeath += new PlayerDeathEventHandler(OnPlayerDeath);
 
+        Victory += new VictoryEventHandler(OnVictory);
+        Defeat += new DefeatEventHandler(OnDefeat);
     }
 
     public static void OnLevelLoaded()
     {
         playerHealth = GameObject.FindGameObjectWithTag(Conf.player_tag).GetComponent<Health>();
         playerShield = GameObject.FindGameObjectWithTag(Conf.player_shield_tag).GetComponent<Shield>();
+
+        bossHealthBar = GameObject.Find("Boss Health Bar");
+        bossHealthBar.SetActive(false);
+
+        musicPlayer = GameObject.FindObjectOfType<MusicPlayer>();
     }
 
     public static void OnStartButtonClicked()
@@ -67,9 +82,9 @@ public static class GLogic
         Application.LoadLevel("battle_backup");
     }
 
-    public static void OnDifficultyButtonClicked(GameMode newGameMode)
+    public static void OnDifficultyButtonClicked(DifficultyMode newGameMode)
     {
-        gameMode = newGameMode;
+        difficultyMode = newGameMode;
     }
 
     public static void OnShotCollision(GameObject source, GameObject target, Shot shot)
@@ -79,20 +94,20 @@ public static class GLogic
 
         if(source.tag == Conf.player_tag)
         {
-            if(target.tag == Conf.enemy_tag)
-                EnemyHit(target, shot);
-            
-            if(target.tag == Conf.enemy_shield_tag)
+            if (target.tag == Conf.enemy_shield_tag || target.tag == Conf.boss_shield_tag)
                 EnemyShieldHit(target, shot);
+
+            if(target.tag == Conf.enemy_tag || target.tag == Conf.boss_tag)
+                EnemyHit(target, shot);
         }
 
-        if(source.tag == Conf.enemy_tag)
+        if(source.tag == Conf.enemy_tag || source.tag == Conf.boss_tag)
         {
+            if (target.tag == Conf.player_shield_tag)
+                PlayerShieldHit(shot);
+
             if(target.tag == Conf.player_tag)
                 PlayerHit(shot);
-            
-            if(target.tag == Conf.player_shield_tag)
-                PlayerShieldHit(shot);
         }
     }
 
@@ -112,6 +127,10 @@ public static class GLogic
     {
         if (!playerDead)
         {
+            //If the player shield is depleted, ignore the collision and let it pass through to hit the player
+            if (playerShield.currentAmount <= 0)
+                return;
+
             playerShield.TakeDamage(shot.damage);
 
             shot.Explode();
@@ -130,7 +149,9 @@ public static class GLogic
 
     public static void OnBossSpawn(GameObject boss)
     {
+        bossHealthBar.SetActive(true);
 
+        musicPlayer.PlayBossMusic();
     }
 
     public static void OnEnemyHit(GameObject enemy, Shot shot)
@@ -140,6 +161,9 @@ public static class GLogic
         enemyHealth.TakeDamage(shot.damage);
 
         score += enemy.GetComponent<Points>().hitValue;
+
+        if (enemy.gameObject.tag == Conf.boss_tag)
+            BossHealthChange(enemyHealth.initialHealth, enemyHealth.currentHealth);
 
         shot.Explode();
     }
@@ -158,6 +182,9 @@ public static class GLogic
     public static void OnEnemyShieldHit(GameObject shieldObject, Shot shot)
     {
         var enemyShield = shieldObject.GetComponent<Shield>();
+
+        if (enemyShield.currentAmount <= 0)
+            return;
 
         enemyShield.TakeDamage(shot.damage);
 
@@ -181,9 +208,7 @@ public static class GLogic
     {
         playerDead = true;
 
-        var gameOverScript = GameObject.FindObjectOfType<GameOver>();
-
-        gameOverScript.Begin();
+        Defeat();
     }
 
     static void OnEnemyDeath(GameObject enemy)
@@ -196,9 +221,29 @@ public static class GLogic
 
     static void OnBossDeath(GameObject boss)
     {
-        //do specific boss death stuff
+        var bossHealth = boss.GetComponent<Health>();
+        BossHealthChange(bossHealth.initialHealth, bossHealth.initialHealth);
+
+        bossHealthBar.SetActive(false);
+
+
+        if(difficultyMode != DifficultyMode.Endless)
+        {
+            Victory();
+        }
     }
 
+    static void OnVictory()
+    {
+
+    }
+
+    static void OnDefeat()
+    {
+        var gameOverScript = GameObject.FindObjectOfType<GameOver>();
+
+        gameOverScript.Begin();
+    }
 
 }
 

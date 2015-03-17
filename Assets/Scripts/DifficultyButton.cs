@@ -7,7 +7,7 @@ public class DifficultyButton : MonoBehaviour
     public Sprite upSprite;
     public Sprite downSprite;
 
-    public GameMode setMode;
+    public DifficultyMode setMode;
 
     public GameObject buttonText;
 
@@ -30,7 +30,7 @@ public class DifficultyButton : MonoBehaviour
 	
 	void Update () 
     {
-        if (GLogic.gameMode == setMode)
+        if (GLogic.difficultyMode == setMode)
             SetButton(true);
         else
             SetButton(false);
@@ -53,7 +53,7 @@ public class DifficultyButton : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (GLogic.gameMode != setMode)
+        if (GLogic.difficultyMode != setMode)
         {
             DifficultyButtonClicked(setMode);
             audioSource.Play();

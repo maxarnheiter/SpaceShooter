@@ -54,7 +54,6 @@
      <Compile Include="Assets\Scripts\DeathExplosion.cs" />
      <Compile Include="Assets\Scripts\Delegates.cs" />
      <Compile Include="Assets\Scripts\DifficultyButton.cs" />
-     <Compile Include="Assets\Scripts\DifficultySetting.cs" />
      <Compile Include="Assets\Scripts\EnemyMovement.cs" />
      <Compile Include="Assets\Scripts\EnemyShoot.cs" />
      <Compile Include="Assets\Scripts\EnemySpawner.cs" />
@@ -66,6 +65,7 @@
      <Compile Include="Assets\Scripts\GameOver.cs" />
      <Compile Include="Assets\Scripts\GridParticle.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
+     <Compile Include="Assets\Scripts\Interfaces.cs" />
      <Compile Include="Assets\Scripts\LevelLoadSignaler.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerBounds.cs" />

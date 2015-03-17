@@ -16,6 +16,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject boss;
     public GameObject boss_shield;
 
+    public GameObject buff;
+
     float Ax = -4.6f;
     float Bx = -2.5f;
     float Cx = 0;
@@ -41,7 +43,8 @@ public class EnemySpawner : MonoBehaviour
         TripleDiagonal,
         TripleWall,
         Square, 
-        SquareWide
+        SquareWide,
+        Single
     }
 
 
@@ -62,18 +65,18 @@ public class EnemySpawner : MonoBehaviour
         if (elapsed < minimumSpawnGap)
             return;
 
-       switch(GLogic.gameMode)
+       switch(GLogic.difficultyMode)
        {
-           case GameMode.Easy:
+           case DifficultyMode.Easy:
                DoEasy();
                break;
-           case GameMode.Normal:
+           case DifficultyMode.Normal:
                DoNormal();
                break;
-           case GameMode.Hard:
+           case DifficultyMode.Hard:
                DoHard();
                break;
-           case GameMode.Endless:
+           case DifficultyMode.Endless:
                DoEndless();
                break;
        }
@@ -81,7 +84,14 @@ public class EnemySpawner : MonoBehaviour
 
     void DoEasy()
     {
+
+        SpawnGroup(boss, GroupType.Single, 5f);
+        SpawnGroup(large, GroupType.TripleDiagonal, 5f);
+
+        /*
         SpawnGroup(tiny, GroupType.DoubleHorizontal, 5f);
+
+        SpawnBuff(8f);
 
         SpawnGroup(small, GroupType.TripleTriangle, 10f);
 
@@ -92,6 +102,7 @@ public class EnemySpawner : MonoBehaviour
         SpawnGroup(medium, GroupType.TripleWall, 50f);
 
         SpawnGroup(small, GroupType.SquareWide, 60f);
+         * */
     }
 
     void DoNormal()
@@ -109,7 +120,19 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    
+    void SpawnBuff(float spawnTime)
+    {
+        var elapsed = Time.realtimeSinceStartup - startTime;
+
+        if (elapsed >= spawnTime && elapsed <= (spawnTime + minimumSpawnGap))
+        {
+            float randX = Random.Range(-2.5f, 2.5f);
+
+            GameObject.Instantiate(buff, new Vector3(transform.position.x + randX, transform.position.y, transform.position.z), Quaternion.identity);
+
+            lastSpawnTime = Time.realtimeSinceStartup;
+        }
+    }
 
     void SpawnGroup(GameObject enemy, GroupType groupType, float spawnTime)
     {
@@ -167,6 +190,11 @@ public class EnemySpawner : MonoBehaviour
                     Spawn(enemy, new Vector3(Ex, Ay, 0f));
                     Spawn(enemy, new Vector3(Ax, Ey, 0f));
                     Spawn(enemy, new Vector3(Ex, Ey, 0f));
+                }
+                break;
+                case GroupType.Single:
+                {
+                    Spawn(enemy, new Vector3(Cx, Cy, 0f));
                 }
                 break;
             }

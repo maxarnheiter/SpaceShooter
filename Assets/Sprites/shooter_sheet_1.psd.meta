@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 1b47820574bbd5747a02205cc0b6423f
+timeCreated: 1426597437
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: shooter_sheet_1_0
@@ -32,6 +34,8 @@ TextureImporter:
     21300054: shooter_sheet_1_27
     21300056: shooter_sheet_1_28
     21300058: shooter_sheet_1_29
+    21300060: Empty
+    21300062: Empty
     21300064: shooter_sheet_1_29
     21300066: shooter_sheet_1_30
     21300068: shooter_sheet_1_31
@@ -50,6 +54,7 @@ TextureImporter:
     21300094: shooter_sheet_1_44
     21300096: shooter_sheet_1_45
     21300098: shooter_sheet_1_46
+    21300100: Empty
     21300102: shooter_sheet_1_47
     21300104: shooter_sheet_1_48
     21300106: shooter_sheet_1_49
@@ -123,6 +128,9 @@ TextureImporter:
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -3
   maxTextureSize: 1024
@@ -133,6 +141,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
+  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
@@ -326,7 +335,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 
+    - name: Empty
       rect:
         serializedVersion: 2
         x: 339
@@ -346,7 +355,7 @@ TextureImporter:
       alignment: 2
       pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 
+    - name: Empty
       rect:
         serializedVersion: 2
         x: 314
@@ -596,7 +605,7 @@ TextureImporter:
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 
+    - name: Empty
       rect:
         serializedVersion: 2
         x: 462
@@ -1199,12 +1208,14 @@ TextureImporter:
     - name: shooter_sheet_1_95
       rect:
         serializedVersion: 2
-        x: 339
-        y: 871
-        width: 54
-        height: 38
+        x: 344
+        y: 867
+        width: 24
+        height: 23
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

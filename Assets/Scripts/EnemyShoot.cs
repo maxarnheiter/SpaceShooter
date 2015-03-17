@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class EnemyShoot : MonoBehaviour 
+public class EnemyShoot : MonoBehaviour, IAdjustedDifficulty 
 {
 
     public EnemyShootBehavior shootBehavior;
@@ -27,8 +27,6 @@ public class EnemyShoot : MonoBehaviour
     public GameObject smallShot;
     public GameObject mediumShot;
     public GameObject largeShot;
-
-    float difficulty = 1f;
 
     AudioSource audioSource;
 
@@ -56,28 +54,36 @@ public class EnemyShoot : MonoBehaviour
 
 	void Start () 
     {
-        var difficultyComponent = gameObject.GetComponent<DifficultySetting>();
-
-        if (difficultyComponent != null)
-            difficulty = difficultyComponent.difficulty;
-
         AdjustForDifficulty();
 
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = shotSound;
 	}
 
-    void AdjustForDifficulty()
+    public void AdjustForDifficulty()
     {
-        attackInterval = attackInterval + ((attackInterval * difficulty) - attackInterval);
-
-        clusterSize *= Mathf.Ceil(difficulty);
-
-        clusterMissVariation = clusterMissVariation + ((clusterMissVariation * difficulty) - clusterMissVariation);
-
-        targetMissVariation = targetMissVariation + ((targetMissVariation * difficulty) - targetMissVariation);
+        if (GLogic.difficultyMode == DifficultyMode.Easy)
+            Easy();
+        if (GLogic.difficultyMode == DifficultyMode.Hard)
+            Hard();
     }
-	
+
+    public void Easy()
+    {
+        attackInterval += 0.2f;
+        clusterSize -= 2;
+        clusterMissVariation += 0.5f;
+        targetMissVariation += 0.5f;
+    }
+
+    public void Hard()
+    {
+        attackInterval -= 0.2f;
+        clusterSize += 2;
+        clusterMissVariation -= 0.2f;
+        targetMissVariation -= 0.2f;
+    }
+
 
 	void Update () 
     {

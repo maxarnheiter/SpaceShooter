@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 	
 	}
 
-	void Update () 
+	void FixedUpdate () 
 	{
 		xChange = 0;
 		yChange = 0;

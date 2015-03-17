@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-class EnemyMovement : MonoBehaviour
+class EnemyMovement : MonoBehaviour, IAdjustedDifficulty
 {
     private enum MovePhase
     {
@@ -31,7 +31,28 @@ class EnemyMovement : MonoBehaviour
     void Start()
     {
         playerObj = GameObject.Find("Player Ship");
+
+        AdjustForDifficulty();
     }
+
+    public void AdjustForDifficulty()
+    {
+        if (GLogic.difficultyMode == DifficultyMode.Easy)
+            Easy();
+        if (GLogic.difficultyMode == DifficultyMode.Hard)
+            Hard();
+    }
+
+    public void Easy()
+    {
+        moveSpeed = moveSpeed * 0.65f;
+    }
+
+    public void Hard()
+    {
+        moveSpeed = moveSpeed * 1.3f;
+    }
+
 
     void FixedUpdate()
     {
