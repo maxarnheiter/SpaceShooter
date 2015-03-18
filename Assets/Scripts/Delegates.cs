@@ -46,9 +46,11 @@ public delegate void LevelLoadedEventHandler();
 public delegate void VictoryEventHandler();
 public delegate void DefeatEventHandler();
 
+//Music
+public delegate void MusicPlayerOffEventHandler();
 
 
-
-
+//UI 
+public delegate void ScoreFinishedMovingEventHandler();
 
 

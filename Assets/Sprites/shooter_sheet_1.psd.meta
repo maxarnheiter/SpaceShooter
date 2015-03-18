@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1b47820574bbd5747a02205cc0b6423f
-timeCreated: 1426597437
+timeCreated: 1426691491
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -110,6 +110,9 @@ TextureImporter:
     21300206: shooter_sheet_1_103
     21300208: shooter_sheet_1_104
     21300210: shooter_sheet_1_95
+    21300212: shooter_sheet_1_96
+    21300214: shooter_sheet_1_97
+    21300216: shooter_sheet_1_98
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1212,6 +1215,36 @@ TextureImporter:
         y: 867
         width: 24
         height: 23
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_96
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 210
+        width: 97
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_97
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 178
+        width: 64
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shooter_sheet_1_98
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 205
+        width: 131
+        height: 14
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

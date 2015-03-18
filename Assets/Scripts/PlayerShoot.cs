@@ -41,6 +41,9 @@ public class PlayerShoot : MonoBehaviour {
 	
 	void Shoot()
 	{
+        if (GLogic.isGameOver)
+            return;
+
 		switch (upgradeLevel) 
 		{
 			case 0:

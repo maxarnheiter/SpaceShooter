@@ -54,5 +54,10 @@ public class AudioFader : MonoBehaviour
         if (audioSource.volume <= 0)
             done = true;
     }
+
+    public void SetFadeOut()
+    {
+        fadeOut = true;
+    }
 }
 

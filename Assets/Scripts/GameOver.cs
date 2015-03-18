@@ -18,11 +18,14 @@ public class GameOver : MonoBehaviour
 
     float startTime;
     bool started;
+    bool doOnce;
 
     GameObject scoreTextObj;
     RectTransform scoreTransform;
     Text scoreText;
     int startFontSize;
+
+    event ScoreFinishedMovingEventHandler ScoreFinishedMoving;
 
 	void Start () 
     {
@@ -35,39 +38,53 @@ public class GameOver : MonoBehaviour
         scoreTextObj = GameObject.Find("Score Text");
         scoreText = scoreTextObj.GetComponent<Text>();
         scoreTransform = scoreTextObj.GetComponent<RectTransform>();
+
+        ScoreFinishedMoving += new ScoreFinishedMovingEventHandler(GLogic.OnScoreTextFinishedMoving);
 	}
 	
     void Update()
     {
         if(started)
         {
-            MoveAndScaleScore();
+            MoveScore();
+            CheckScorePosition();
         }
     }
 
-	void FixedUpdate () 
-    {
-       
-	}
-
-    public void Begin()
+    public void Begin(bool isDefeat)
     {
         startTime = Time.realtimeSinceStartup;
 
         spriteFader.enabled = true;
-        primaryAudioFader.enabled = true;
-        secondaryAudioFader.enabled = true;
 
-        audioSource.Play();
+
+        if (isDefeat)
+        {
+            primaryAudioFader.SetFadeOut();
+            secondaryAudioFader.SetFadeOut();
+
+            primaryAudioFader.enabled = true;
+            secondaryAudioFader.enabled = true;
+            audioSource.Play();
+        }
 
         started = true;
     }
 
-    void MoveAndScaleScore()
+    void MoveScore()
     {
-       //change font size?
-
-
         scoreTransform.anchoredPosition = Vector3.MoveTowards(scoreTransform.anchoredPosition, Conf.scoreFinalPos, scoreMoveSpeed);
+    }
+
+    void CheckScorePosition()
+    {
+        if(!doOnce)
+        {
+            if(scoreTransform.anchoredPosition.x == Conf.scoreFinalPos.x && scoreTransform.anchoredPosition.y == Conf.scoreFinalPos.y)
+            {
+                doOnce = true;
+                ScoreFinishedMoving();
+            }
+        }
     }
 }

@@ -126,7 +126,7 @@ public class EnemyShoot : MonoBehaviour, IAdjustedDifficulty
 
     void DoShot(ShotType shotType, Vector3 startPosition, Vector3 targetPosition, float speedBoost)
     {
-        if (GLogic.playerDead)
+        if (GLogic.playerDead || GLogic.isGameOver)
             return;
 
         GameObject newShot = null;

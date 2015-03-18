@@ -20,9 +20,13 @@ public class MusicPlayer : MonoBehaviour
     bool playBoss = false;
     bool usePrimary = true;
     bool transitioning = false;
+    bool turnOff = false;
 
     AudioSource primarySource;
     AudioSource secondarySource;
+
+    bool doOnce = false;
+    event MusicPlayerOffEventHandler MusicPlayerOff;
 
 
 	void Start () 
@@ -34,20 +38,37 @@ public class MusicPlayer : MonoBehaviour
 
         primarySource.volume = volume;
         secondarySource.volume = 0;
+
+        MusicPlayerOff += new MusicPlayerOffEventHandler(GLogic.OnMusicPlayerOff);
 	}
 	
 
 	void FixedUpdate () 
     {
-        if (!primarySource.isPlaying)
-            primarySource.Play();
-        if (!secondarySource.isPlaying)
-            secondarySource.Play();
+        if (!turnOff)
+        {
+            if (!primarySource.isPlaying)
+                primarySource.Play();
+            if (!secondarySource.isPlaying)
+                secondarySource.Play();
 
-        CheckForTimeTransition();
+            CheckForTimeTransition();
 
-        if (transitioning)
-            Transition();
+            if (transitioning)
+                Transition();
+        }
+        else
+        {
+            FadeOut();
+            if(!doOnce)
+            {
+                if(primarySource.volume <= 0 && secondarySource.volume <= 0)
+                {
+                    doOnce = true;
+                    MusicPlayerOff();
+                }
+            }
+        }
 	}
 
     void BeginTransition()
@@ -112,6 +133,12 @@ public class MusicPlayer : MonoBehaviour
 
     }
 
+    void FadeOut()
+    {
+        primarySource.volume -= transitionRate;
+        secondarySource.volume -= transitionRate;
+    }
+
     public void PlayStandardMusic()
     {
         playBoss = false;
@@ -122,5 +149,10 @@ public class MusicPlayer : MonoBehaviour
     {
         playBoss = true;
         BeginTransition();
+    }
+
+    public void TurnOff()
+    {
+        turnOff = true;
     }
 }

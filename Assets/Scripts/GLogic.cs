@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class GLogic
 {
@@ -19,6 +20,7 @@ public static class GLogic
     static Shield playerShield;
 
     public static bool playerDead;
+    public static bool isGameOver;
 
     public static float score;
 
@@ -113,7 +115,7 @@ public static class GLogic
 
     public static void OnPlayerHit(Shot shot)
     {
-        if (!playerDead)
+        if (!playerDead && !isGameOver)
         {
             playerHealth.TakeDamage(shot.damage);
 
@@ -125,7 +127,7 @@ public static class GLogic
 
     public static void OnPlayerShieldHit(Shot shot)
     {
-        if (!playerDead)
+        if (!playerDead && !isGameOver)
         {
             //If the player shield is depleted, ignore the collision and let it pass through to hit the player
             if (playerShield.currentAmount <= 0)
@@ -160,7 +162,8 @@ public static class GLogic
 
         enemyHealth.TakeDamage(shot.damage);
 
-        score += enemy.GetComponent<Points>().hitValue;
+        if(!isGameOver)
+            score += enemy.GetComponent<Points>().hitValue;
 
         if (enemy.gameObject.tag == Conf.boss_tag)
             BossHealthChange(enemyHealth.initialHealth, enemyHealth.currentHealth);
@@ -213,7 +216,8 @@ public static class GLogic
 
     static void OnEnemyDeath(GameObject enemy)
     {
-        score += enemy.GetComponent<Points>().deathValue;
+        if (!isGameOver)
+            score += enemy.GetComponent<Points>().deathValue;
 
         if (enemy.tag == Conf.boss_tag)
             BossDeath(enemy);
@@ -229,22 +233,43 @@ public static class GLogic
 
         if(difficultyMode != DifficultyMode.Endless)
         {
+            musicPlayer.TurnOff();
             Victory();
         }
+
+        musicPlayer.PlayStandardMusic();
     }
 
     static void OnVictory()
     {
+        isGameOver = true;
 
+        var gameOverScript = GameObject.FindObjectOfType<GameOver>();
+
+        gameOverScript.Begin(false);
     }
 
     static void OnDefeat()
     {
+        isGameOver = true;
+
         var gameOverScript = GameObject.FindObjectOfType<GameOver>();
 
-        gameOverScript.Begin();
+        gameOverScript.Begin(true);
     }
 
+    public static void OnMusicPlayerOff()
+    {
+        var victory_player = Resources.Load("victory_audio_player") as GameObject;
+        GameObject.Instantiate(victory_player);
+    }
+
+    public static void OnScoreTextFinishedMoving()
+    {
+        var finalScoreText = GameObject.Find("Final Score Text").GetComponent<Text>();
+
+        finalScoreText.enabled = true;
+    }
 }
 
 
