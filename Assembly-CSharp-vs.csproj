@@ -67,6 +67,8 @@
      <Compile Include="Assets\Scripts\Health.cs" />
      <Compile Include="Assets\Scripts\Interfaces.cs" />
      <Compile Include="Assets\Scripts\LevelLoadSignaler.cs" />
+     <Compile Include="Assets\Scripts\MainMenuButton.cs" />
+     <Compile Include="Assets\Scripts\MainMenuTransitioner.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerBounds.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />

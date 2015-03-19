@@ -52,5 +52,7 @@ public delegate void MusicPlayerOffEventHandler();
 
 //UI 
 public delegate void ScoreFinishedMovingEventHandler();
+public delegate void MainMenuButtonClickedEventHandler();
+public delegate void MainMenuTransitionerCompletedEventHandler();
 
 

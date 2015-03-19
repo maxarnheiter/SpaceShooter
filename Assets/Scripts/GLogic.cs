@@ -14,6 +14,8 @@ public static class GLogic
     static event VictoryEventHandler Victory;
     static event DefeatEventHandler Defeat;
 
+    static bool isVictory;
+
 
     //Player
     static Health playerHealth;
@@ -243,10 +245,14 @@ public static class GLogic
     static void OnVictory()
     {
         isGameOver = true;
+        isVictory = true;
 
         var gameOverScript = GameObject.FindObjectOfType<GameOver>();
 
         gameOverScript.Begin(false);
+
+        
+
     }
 
     static void OnDefeat()
@@ -256,6 +262,8 @@ public static class GLogic
         var gameOverScript = GameObject.FindObjectOfType<GameOver>();
 
         gameOverScript.Begin(true);
+
+        
     }
 
     public static void OnMusicPlayerOff()
@@ -269,6 +277,32 @@ public static class GLogic
         var finalScoreText = GameObject.Find("Final Score Text").GetComponent<Text>();
 
         finalScoreText.enabled = true;
+
+        if(isVictory)
+        {
+            var victoryTextObject = GameObject.Find("Victory");
+            victoryTextObject.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else
+        {
+            var defeatTextObject = GameObject.Find("Defeat");
+            defeatTextObject.GetComponent<SpriteRenderer>().enabled = true;
+        }
+
+        var mainMenuButton = GameObject.Find("Main Menu");
+        mainMenuButton.GetComponent<MainMenuButton>().Enable();
+    }
+
+    public static void OnMainMenuButtonClicked()
+    {
+        var mainMenuTransitioner = GameObject.FindObjectOfType<MainMenuTransitioner>();
+        mainMenuTransitioner.enabled = true;
+
+    }
+
+    public static void OnMainMenuTransitionerCompleted()
+    {
+        Application.LoadLevel("intro_backup");
     }
 }
 
