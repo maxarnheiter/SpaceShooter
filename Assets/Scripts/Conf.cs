@@ -16,7 +16,7 @@ public static class Conf
     public const string boss_shield_tag = "boss shield";
 
     //score
-    public static Vector3 scoreFinalPos = new Vector3(6.75f, 45f, 0f);
+    public static Vector3 scoreFinalPos = new Vector3(0f, 45f, 0f);
     public const int scoreFinalFontSize = 40;
 }
 

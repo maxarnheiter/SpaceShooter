@@ -46,8 +46,6 @@ public static class GLogic
     static event BossSpawnEventHandler BossSpawn;
     public static event BossHealthChangeEventHandler BossHealthChange;
 
-    static GameObject bossHealthBar;
-
     //Music
     static MusicPlayer musicPlayer;
 
@@ -72,17 +70,27 @@ public static class GLogic
 
     public static void OnLevelLoaded()
     {
-        playerHealth = GameObject.FindGameObjectWithTag(Conf.player_tag).GetComponent<Health>();
-        playerShield = GameObject.FindGameObjectWithTag(Conf.player_shield_tag).GetComponent<Shield>();
+        if (gameState == GameState.Battle)
+        {
+            score = 0;
+            playerDead = false;
+            isGameOver = false;
+            isVictory = false;
 
-        bossHealthBar = GameObject.Find("Boss Health Bar");
-        bossHealthBar.SetActive(false);
+            playerHealth = GameObject.FindGameObjectWithTag(Conf.player_tag).GetComponent<Health>();
+            playerShield = GameObject.FindGameObjectWithTag(Conf.player_shield_tag).GetComponent<Shield>();
 
-        musicPlayer = GameObject.FindObjectOfType<MusicPlayer>();
+            SetBossHealthBarActive(false);
+
+            musicPlayer = GameObject.FindObjectOfType<MusicPlayer>();
+        }
+
     }
 
     public static void OnStartButtonClicked()
     {
+
+        gameState = GameState.Battle;
         Application.LoadLevel("battle_backup");
     }
 
@@ -153,7 +161,7 @@ public static class GLogic
 
     public static void OnBossSpawn(GameObject boss)
     {
-        bossHealthBar.SetActive(true);
+        SetBossHealthBarActive(true);
 
         musicPlayer.PlayBossMusic();
     }
@@ -230,7 +238,7 @@ public static class GLogic
         var bossHealth = boss.GetComponent<Health>();
         BossHealthChange(bossHealth.initialHealth, bossHealth.initialHealth);
 
-        bossHealthBar.SetActive(false);
+        SetBossHealthBarActive(false);
 
 
         if(difficultyMode != DifficultyMode.Endless)
@@ -244,6 +252,7 @@ public static class GLogic
 
     static void OnVictory()
     {
+        gameState = GameState.GameOver;
         isGameOver = true;
         isVictory = true;
 
@@ -257,6 +266,7 @@ public static class GLogic
 
     static void OnDefeat()
     {
+        gameState = GameState.GameOver;
         isGameOver = true;
 
         var gameOverScript = GameObject.FindObjectOfType<GameOver>();
@@ -303,6 +313,16 @@ public static class GLogic
     public static void OnMainMenuTransitionerCompleted()
     {
         Application.LoadLevel("intro_backup");
+    }
+
+    static void SetBossHealthBarActive(bool active)
+    {
+        var bossHealthBar = GameObject.Find("Boss Health Bar");
+      
+        foreach(Transform t in bossHealthBar.transform)
+        {
+            t.gameObject.SetActive(active);
+        }
     }
 }
 

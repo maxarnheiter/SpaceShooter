@@ -45,7 +45,7 @@ class EnemyMovement : MonoBehaviour, IAdjustedDifficulty
 
     public void Easy()
     {
-        moveSpeed = moveSpeed * 0.65f;
+        moveSpeed = moveSpeed * 0.55f;
     }
 
     public void Hard()

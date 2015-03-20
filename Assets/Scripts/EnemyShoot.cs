@@ -70,8 +70,8 @@ public class EnemyShoot : MonoBehaviour, IAdjustedDifficulty
 
     public void Easy()
     {
-        attackInterval += 0.2f;
-        clusterSize -= 2;
+        attackInterval += 0.4f;
+        clusterSize -= 1;
         clusterMissVariation += 0.5f;
         targetMissVariation += 0.5f;
     }
