@@ -129,7 +129,11 @@ public class PlayerShoot : MonoBehaviour {
 
 	void Level_3_Shoot()
 	{
-        DoShot(ShotType.Large, transform.position, Vector3.up, 1.5f);
+        var xRange = Random.Range(-0.1f, 0.1f);
+
+        var startPosition = new Vector3(transform.position.x + xRange, transform.position.y, transform.position.z);
+
+        DoShot(ShotType.Large, startPosition, Vector3.up, 1.5f);
 	}
 
     void Level_4_Shoot()

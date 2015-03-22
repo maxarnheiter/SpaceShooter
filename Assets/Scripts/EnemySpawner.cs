@@ -25,10 +25,10 @@ public class EnemySpawner : MonoBehaviour
     float Ex = 4.5f;
 
     float Ay = 4.5f;
-    float By = 3.5f;
-    float Cy = 2.5f;
-    float Dy = 1.5f;
-    float Ey = 0;
+    float By = 4f;
+    float Cy = 3.5f;
+    float Dy = 3f;
+    float Ey = 2.5f;
 
     float minimumSpawnGap = 1f;
     float lastSpawnTime;
@@ -123,23 +123,25 @@ public class EnemySpawner : MonoBehaviour
 
         SpawnGroup(tiny_shield, GroupType.DoubleVertical, 4f);
 
-        SpawnGroup(small, GroupType.TripleTriangle, 8f);
+        SpawnGroup(small, GroupType.DoubleHorizontal, 8f);
 
-        SpawnGroup(small_shield, GroupType.TripleTriangle, 12f);
+        SpawnGroup(small_shield, GroupType.TripleTriangle, 14f);
 
-        SpawnGroup(medium, GroupType.Square, 17f);
+        SpawnGroup(medium, GroupType.Square, 18f);
 
         SpawnGroup(large_shield, GroupType.Single, 22f);
 
+        SpawnBuff(23f);
+
         SpawnGroup(tiny_shield, GroupType.TripleDiagonal, 25f);
 
-        SpawnGroup(small, GroupType.DoubleVertical, 27f);
+        SpawnGroup(small, GroupType.DoubleVertical, 29f);
 
-        SpawnBuff(32f);
-
-        SpawnGroup(large, GroupType.TripleDiagonal, 34f);
+        SpawnGroup(large, GroupType.Single, 34f);
 
         SpawnGroup(tiny_shield, GroupType.TripleTriangle, 38f);
+
+        SpawnGroup(large, GroupType.Single, 40f);
 
         SpawnGroup(medium_shield, GroupType.Single, 43f);
 
@@ -153,20 +155,87 @@ public class EnemySpawner : MonoBehaviour
 
         SpawnGroup(large_shield, GroupType.Single, 72f);
 
-        SpawnGroup(tiny_shield, GroupType.SquareWide, 83f);
+        SpawnGroup(tiny_shield, GroupType.Square, 83f);
 
         SpawnGroup(medium_shield, GroupType.TripleWall, 87f);
 
         SpawnGroup(large_shield, GroupType.Single, 89f);
 
-        
+        SpawnBuff(90f);
 
-        //SpawnGroup(boss, GroupType.Single, 70f);
+        SpawnGroup(small_shield, GroupType.DoubleHorizontal, 93f);
+
+        SpawnGroup(small_shield, GroupType.TripleWall, 97f);
+
+        SpawnGroup(small_shield, GroupType.Square, 103f);
+
+        SpawnGroup(medium_shield, GroupType.Single, 107f);
+
+        SpawnGroup(large_shield, GroupType.DoubleVertical, 112f);
+
+        SpawnGroup(boss, GroupType.Single, 120f);
+
+        SpawnGroup(small, GroupType.Square, 125f);
+
+        SpawnGroup(small, GroupType.Square, 135f);
+
+        SpawnGroup(small, GroupType.Square, 145f);
+
+        SpawnGroup(small, GroupType.Square, 155f);
+
     }
 
     void DoHard()
     {
+        SpawnBuff(3f);
 
+        SpawnGroup(tiny_shield, GroupType.DoubleVertical, 5f);
+
+        SpawnGroup(tiny_shield, GroupType.TripleTriangle, 8f);
+
+        SpawnGroup(tiny_shield, GroupType.Square, 12f);
+
+        SpawnGroup(small_shield, GroupType.DoubleVertical, 15f);
+
+        SpawnGroup(small_shield, GroupType.TripleTriangle, 19f);
+
+        SpawnGroup(small_shield, GroupType.Square, 24f);
+
+        SpawnGroup(medium_shield, GroupType.Single, 25f);
+
+        SpawnBuff(25f);
+
+        SpawnGroup(medium_shield, GroupType.DoubleHorizontal, 27f);
+
+        SpawnGroup(small_shield, GroupType.Single, 30f);
+
+        SpawnGroup(medium_shield, GroupType.SquareWide, 32f);
+
+        SpawnGroup(small_shield, GroupType.DoubleVertical, 36f);
+
+        SpawnGroup(medium_shield, GroupType.TripleWall, 40f);
+
+        SpawnGroup(tiny_shield, GroupType.DoubleHorizontal, 45f);
+
+        SpawnBuff(50f);
+
+        SpawnGroup(large_shield, GroupType.DoubleHorizontal, 55f);
+
+        SpawnGroup(medium_shield, GroupType.Single, 60f);
+
+        SpawnGroup(large_shield, GroupType.TripleDiagonal, 65f);
+
+        SpawnGroup(medium_shield, GroupType.SquareWide, 70f);
+
+        SpawnGroup(large_shield, GroupType.Single, 74f);
+
+        SpawnBuff(75f);
+
+        SpawnBuff(100f);
+
+        SpawnBuff(125f);
+
+        SpawnGroup(boss, GroupType.Single, 200f);
     }
 
     void DoEndless()
