@@ -53,7 +53,7 @@ public class GameOver : MonoBehaviour
 
     public void Begin(bool isDefeat)
     {
-        startTime = Time.realtimeSinceStartup;
+        startTime = Time.time;
 
         spriteFader.enabled = true;
 

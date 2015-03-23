@@ -15,7 +15,7 @@ public class Explosion : MonoBehaviour
 	
 	void Start () 
     {
-        startTime = Time.realtimeSinceStartup;
+        startTime = Time.time;
         endTime = startTime + animationDuration;
         endFadeTime = endTime + fadeDuration;
 
@@ -25,7 +25,7 @@ public class Explosion : MonoBehaviour
 	
 	void Update () 
     {
-        var now = Time.realtimeSinceStartup;
+        var now = Time.time;
 
         if (now >= endTime)
             BeginFade();
@@ -34,7 +34,7 @@ public class Explosion : MonoBehaviour
 
     void BeginFade()
     {
-        var now = Time.realtimeSinceStartup;
+        var now = Time.time;
 
         if (now >= endFadeTime)
             Destroy(gameObject);

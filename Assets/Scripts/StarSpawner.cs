@@ -22,7 +22,7 @@ public class StarSpawner : MonoBehaviour
 	
 	void Update () 
     {
-        var now = Time.realtimeSinceStartup;
+        var now = Time.time;
         var elapsed = now - lastStarSpawnTime;
 
         if (elapsed >= spawnInterval)

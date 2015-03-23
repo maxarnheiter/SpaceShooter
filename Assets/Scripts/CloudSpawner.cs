@@ -22,7 +22,7 @@ public class CloudSpawner : MonoBehaviour
 	
 	void Update () 
 	{
-		float elapsedTime = Time.realtimeSinceStartup - lastCloudSpawnTime;
+		float elapsedTime = Time.time - lastCloudSpawnTime;
 		
 		if(elapsedTime >= minimumCloudInterval)
 			SpawnCloud();
@@ -44,7 +44,7 @@ public class CloudSpawner : MonoBehaviour
 		
 		newCloud.transform.parent = transform;
 		
-		lastCloudSpawnTime = Time.realtimeSinceStartup;
+		lastCloudSpawnTime = Time.time;
 	}
 	
 	

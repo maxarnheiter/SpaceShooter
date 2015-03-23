@@ -31,7 +31,7 @@ public class ResourceBarAnimator : MonoBehaviour
 	
 	void FixedUpdate () 
     {
-        var now = Time.realtimeSinceStartup;
+        var now = Time.time;
         var elapsed = now - lastFadeTime;
 
         if (elapsed >= fadeInterval)

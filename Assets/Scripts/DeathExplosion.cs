@@ -39,7 +39,7 @@ public class DeathExplosion : MonoBehaviour
     {
 	    if(isExploding)
         {
-            var now = Time.realtimeSinceStartup;
+            var now = Time.time;
 
             if (now >= (lastExplosionTime + explosionInterval))
                 DoExplosion();
@@ -54,7 +54,7 @@ public class DeathExplosion : MonoBehaviour
     {
         if (!isExploding)
         {
-            startTime = Time.realtimeSinceStartup;
+            startTime = Time.time;
 
             endTime = startTime + explosionDuration;
 
@@ -69,7 +69,7 @@ public class DeathExplosion : MonoBehaviour
 
     void DoExplosion()
     {
-        lastExplosionTime = Time.realtimeSinceStartup;
+        lastExplosionTime = Time.time;
 
         var randomX = Random.Range((xRange * -1f), xRange);
         var randomY = Random.Range((yRange * -1f), yRange);

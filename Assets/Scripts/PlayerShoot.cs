@@ -30,7 +30,7 @@ public class PlayerShoot : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (KeyCode.Mouse0)) 
 		{
-			float timePassed = Time.realtimeSinceStartup - lastShotTime;
+			float timePassed = Time.time - lastShotTime;
 
 			float adjustedShotInterval = shotInterval + (upgradeLevel * upgradeIntervalBonus);
 
@@ -69,7 +69,7 @@ public class PlayerShoot : MonoBehaviour {
             break;
 		}
 
-		lastShotTime = Time.realtimeSinceStartup;
+		lastShotTime = Time.time;
 	}
 
 	void DoShot(ShotType shotType, Vector3 startPosition, Vector3 targetPosition, float speedBoost)

@@ -71,7 +71,7 @@ public class Shield : MonoBehaviour, IAdjustedDifficulty
     {
         if (lastHitTime != 0)
         {
-            var now = Time.realtimeSinceStartup;
+            var now = Time.time;
             var elapsed = now - lastHitTime;
 
             currentTransparency = 1f - (elapsed / fadeTime);
@@ -86,7 +86,7 @@ public class Shield : MonoBehaviour, IAdjustedDifficulty
     public void TakeDamage(float damage)
     {
         currentTransparency = 1f;
-        lastHitTime = Time.realtimeSinceStartup;
+        lastHitTime = Time.time;
 
         currentAmount -= damage;
     }

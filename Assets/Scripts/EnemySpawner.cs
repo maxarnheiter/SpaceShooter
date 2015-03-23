@@ -54,12 +54,12 @@ public class EnemySpawner : MonoBehaviour
     {
         EnemySpawn += new EnemySpawnEventHandler(GLogic.OnEnemySpawn);
 
-        startTime = Time.realtimeSinceStartup;
+        startTime = Time.time;
     }
 
     void FixedUpdate()
     {
-        var now = Time.realtimeSinceStartup;
+        var now = Time.time;
         var elapsed = now - lastSpawnTime;
 
         if (elapsed < minimumSpawnGap)
@@ -231,21 +231,128 @@ public class EnemySpawner : MonoBehaviour
 
         SpawnBuff(75f);
 
+        SpawnGroup(medium_shield, GroupType.Square, 77f);
+
+        SpawnGroup(large_shield, GroupType.DoubleHorizontal, 82);
+
+        SpawnGroup(large_shield, GroupType.TripleDiagonal, 90f);
+
+        SpawnGroup(small_shield, GroupType.TripleWall, 93f);
+
+        SpawnGroup(tiny_shield, GroupType.Square, 98f);
+
         SpawnBuff(100f);
+
+        SpawnGroup(small_shield, GroupType.Single, 101f);
+
+        SpawnGroup(small_shield, GroupType.DoubleHorizontal, 103f);
+
+        SpawnGroup(small_shield, GroupType.Single, 105f);
+
+        SpawnGroup(small_shield, GroupType.DoubleVertical, 107f);
+
+        SpawnGroup(small_shield, GroupType.Single, 109f);
+
+        SpawnGroup(small_shield, GroupType.DoubleHorizontal, 111f);
+
+        SpawnGroup(small_shield, GroupType.Single, 113f);
+
+        SpawnGroup(small_shield, GroupType.Single, 115f);
+
+        SpawnGroup(small_shield, GroupType.DoubleVertical, 117f);
+
+        SpawnGroup(small_shield, GroupType.Single, 119f);
+
+        SpawnGroup(small_shield, GroupType.DoubleHorizontal, 121f);
+
+        SpawnGroup(small_shield, GroupType.Single, 123f);
 
         SpawnBuff(125f);
 
-        SpawnGroup(boss, GroupType.Single, 200f);
+        SpawnGroup(tiny_shield, GroupType.Square, 127f);
+
+        SpawnGroup(tiny_shield, GroupType.TripleTriangle, 130f);
+
+        SpawnGroup(tiny_shield, GroupType.DoubleHorizontal, 135f);
+
+        SpawnGroup(small_shield, GroupType.TripleWall, 139f);
+
+        SpawnGroup(small_shield, GroupType.DoubleVertical, 144f);
+
+        SpawnGroup(small_shield, GroupType.Square, 148f);
+
+        SpawnGroup(small_shield, GroupType.TripleWall, 152f);
+
+        SpawnGroup(medium_shield, GroupType.DoubleVertical, 155f);
+
+        SpawnGroup(medium_shield, GroupType.TripleDiagonal, 160f);
+
+        SpawnGroup(medium_shield, GroupType.DoubleHorizontal, 165f);
+
+        SpawnGroup(medium_shield, GroupType.Square, 170f);
+
+        SpawnGroup(large_shield, GroupType.Single, 175f);
+
+        SpawnGroup(tiny_shield, GroupType.Square, 180f);
+
+        SpawnGroup(large_shield, GroupType.DoubleHorizontal, 185f);
+
+        SpawnGroup(tiny_shield, GroupType.Square, 190f);
+
+        SpawnGroup(large_shield, GroupType.TripleTriangle, 192f);
+
+        SpawnGroup(boss_shield, GroupType.Single, 200f);
     }
 
     void DoEndless()
     {
+        var elapsed = Time.time - startTime;
+        var loopPeriod = 75f;
+        var loop = Mathf.Floor(elapsed / loopPeriod);
 
+
+        //Do once per loop
+        SpawnBuff((loop * loopPeriod) + 2);
+
+        SpawnGroup(tiny_shield, GroupType.TripleTriangle, (loop * loopPeriod) + 13);
+
+        SpawnGroup(medium_shield, GroupType.DoubleVertical, (loop * loopPeriod) + 23);
+
+        SpawnGroup(small_shield, GroupType.Square, (loop * loopPeriod) + 27);
+
+        SpawnBuff((loop * loopPeriod) + 30);
+
+        SpawnGroup(large, GroupType.Single, (loop * loopPeriod) + 40);
+
+        SpawnGroup(boss, GroupType.Single, (loop * loopPeriod) + 55);
+
+        //Do i times per loop
+        for (int i = 0; i <= loop; i++)
+        {
+          
+            SpawnGroup(tiny, GroupType.Single, (loop * loopPeriod) + 3 + i);
+
+            SpawnGroup(small, GroupType.Single, (loop * loopPeriod) + 9 + i);
+
+            SpawnGroup(small_shield, GroupType.Single, (loop * loopPeriod) + 15 + i);
+
+            SpawnGroup(medium, GroupType.Single, (loop * loopPeriod) + 20 + i);
+
+            SpawnGroup(tiny, GroupType.DoubleHorizontal, (loop * loopPeriod) + 35 + i);
+
+            SpawnGroup(large, GroupType.Single, (loop * loopPeriod) + 45 + i);
+
+            SpawnGroup(large_shield, GroupType.Single, (loop * loopPeriod) + 50 + i);
+
+            SpawnGroup(tiny_shield, GroupType.DoubleHorizontal, (loop * loopPeriod) + 56 + i);
+
+        }
+            
     }
 
     void SpawnBuff(float spawnTime)
     {
-        var elapsed = Time.realtimeSinceStartup - startTime;
+        var elapsed = Time.time - startTime;
 
         if (elapsed >= spawnTime && elapsed <= (spawnTime + minimumSpawnGap))
         {
@@ -253,17 +360,17 @@ public class EnemySpawner : MonoBehaviour
 
             GameObject.Instantiate(buff, new Vector3(transform.position.x + randX, transform.position.y, transform.position.z), Quaternion.identity);
 
-            lastSpawnTime = Time.realtimeSinceStartup;
+            lastSpawnTime = Time.time;
         }
     }
 
     void SpawnGroup(GameObject enemy, GroupType groupType, float spawnTime)
     {
-        var elapsed = Time.realtimeSinceStartup - startTime;
+
+        var elapsed = Time.time - startTime;
 
         if (elapsed >= spawnTime && elapsed <= (spawnTime + minimumSpawnGap))
         {
-
             switch(groupType)
             {
                 case GroupType.DoubleHorizontal:
@@ -322,7 +429,7 @@ public class EnemySpawner : MonoBehaviour
                 break;
             }
 
-            lastSpawnTime = Time.realtimeSinceStartup;
+            lastSpawnTime = Time.time;
         }
     }
 

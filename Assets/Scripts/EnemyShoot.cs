@@ -181,7 +181,7 @@ public class EnemyShoot : MonoBehaviour, IAdjustedDifficulty
                 break;
         }
 
-        lastAttackTime = Time.realtimeSinceStartup;
+        lastAttackTime = Time.time;
     }
 
     void BlindFire()
@@ -245,7 +245,7 @@ public class EnemyShoot : MonoBehaviour, IAdjustedDifficulty
 
     bool MinimumTimeElapsed()
     {
-        var now = Time.realtimeSinceStartup;
+        var now = Time.time;
         var elapsed = now - lastAttackTime;
 
         if (elapsed >= attackInterval)
