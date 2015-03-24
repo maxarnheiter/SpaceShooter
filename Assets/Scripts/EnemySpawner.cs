@@ -279,9 +279,13 @@ public class EnemySpawner : MonoBehaviour
 
         SpawnGroup(small_shield, GroupType.DoubleVertical, 144f);
 
+        SpawnGroup(small_shield, GroupType.TripleTriangle, 146f);
+
         SpawnGroup(small_shield, GroupType.Square, 148f);
 
         SpawnGroup(small_shield, GroupType.TripleWall, 152f);
+
+        SpawnGroup(small_shield, GroupType.Single, 154f);
 
         SpawnGroup(medium_shield, GroupType.DoubleVertical, 155f);
 
@@ -302,6 +306,10 @@ public class EnemySpawner : MonoBehaviour
         SpawnGroup(large_shield, GroupType.TripleTriangle, 192f);
 
         SpawnGroup(boss_shield, GroupType.Single, 200f);
+
+        SpawnGroup(tiny_shield, GroupType.Square, 201f);
+
+        SpawnGroup(medium_shield, GroupType.DoubleVertical, 202f);
     }
 
     void DoEndless()
@@ -324,7 +332,11 @@ public class EnemySpawner : MonoBehaviour
 
         SpawnGroup(large, GroupType.Single, (loop * loopPeriod) + 40);
 
-        SpawnGroup(boss, GroupType.Single, (loop * loopPeriod) + 55);
+        SpawnGroup(large_shield, GroupType.Single, (loop * loopPeriod) + 49);
+
+        SpawnGroup(medium_shield, GroupType.TripleWall, (loop * loopPeriod) + 53);
+
+        SpawnGroup(boss_shield, GroupType.Single, (loop * loopPeriod) + 55);
 
         //Do i times per loop
         for (int i = 0; i <= loop; i++)
@@ -345,6 +357,8 @@ public class EnemySpawner : MonoBehaviour
             SpawnGroup(large_shield, GroupType.Single, (loop * loopPeriod) + 50 + i);
 
             SpawnGroup(tiny_shield, GroupType.DoubleHorizontal, (loop * loopPeriod) + 56 + i);
+
+            SpawnGroup(tiny, GroupType.TripleDiagonal, (loop * loopPeriod) + 58 + i);
 
         }
             
