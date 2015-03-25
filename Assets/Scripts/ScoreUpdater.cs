@@ -15,6 +15,6 @@ public class ScoreUpdater : MonoBehaviour
 
 	void Update () 
     {
-        textComponent.text = GLogic.score.ToString();
+        textComponent.text = GLogic.score.ToString("#,##0");
 	}
 }
